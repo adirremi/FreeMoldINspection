@@ -1,0 +1,113 @@
+---
+/**
+ * Primary navigation. The mobile menu uses a CSS-only checkbox/peer toggle,
+ * so it ships ZERO client-side JavaScript while remaining keyboard accessible.
+ */
+import { SITE } from "@data/site";
+import Icon from "@components/Icon.astro";
+import { Image } from "astro:assets";
+import logo from "@assets/images/logo.jpeg";
+
+const currentPath = Astro.url.pathname;
+
+function isActive(href: string): boolean {
+  if (href === "/") return currentPath === "/";
+  return currentPath.startsWith(href);
+}
+---
+
+<header class="sticky top-0 z-50 border-b border-ink-200 bg-white/90 backdrop-blur">
+  <nav
+    class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6"
+    aria-label="Primary"
+  >
+    <a href="/" class="flex items-center gap-3" aria-label={`${SITE.name} home`}>
+      <Image
+        src={logo}
+        alt={`${SITE.name} logo`}
+        width={48}
+        height={48}
+        class="h-11 w-11 rounded-lg object-cover"
+        loading="eager"
+      />
+      <span class="text-base font-extrabold leading-tight text-ink-900 sm:text-lg">
+        Free Mold<span class="text-brand-600"> Inspection</span>
+      </span>
+    </a>
+
+    <!-- Desktop links -->
+    <ul class="hidden items-center gap-1 md:flex">
+      {
+        SITE.nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={[
+                "rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                isActive(item.href)
+                  ? "text-brand-700"
+                  : "text-ink-700 hover:bg-brand-50 hover:text-brand-700",
+              ]}
+              aria-current={isActive(item.href) ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <a
+      href={SITE.phoneHref}
+      class="hidden items-center gap-2 rounded-xl bg-brand-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-700 md:inline-flex"
+    >
+      <Icon name="phone" class="h-4 w-4" />
+      {SITE.phone}
+    </a>
+
+    <!-- Mobile toggle (CSS-only) -->
+    <input type="checkbox" id="nav-toggle" class="peer sr-only" aria-label="Toggle navigation menu" />
+    <label
+      for="nav-toggle"
+      class="inline-flex cursor-pointer items-center justify-center rounded-lg p-2 text-ink-800 ring-1 ring-ink-200 peer-focus-visible:outline peer-focus-visible:outline-3 peer-focus-visible:outline-brand-500 md:hidden"
+    >
+      <Icon name="menu" class="h-6 w-6" />
+      <span class="sr-only">Open main menu</span>
+    </label>
+
+    <!-- Mobile menu -->
+    <div
+      class="absolute inset-x-0 top-full hidden border-b border-ink-200 bg-white shadow-lg peer-checked:block md:hidden"
+    >
+      <ul class="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3">
+        {
+          SITE.nav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class:list={[
+                  "block rounded-lg px-3 py-3 text-base font-medium",
+                  isActive(item.href)
+                    ? "bg-brand-50 text-brand-700"
+                    : "text-ink-800 hover:bg-ink-100",
+                ]}
+                aria-current={isActive(item.href) ? "page" : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+        <li class="mt-2">
+          <a
+            href={SITE.phoneHref}
+            class="flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-4 py-3 text-base font-semibold text-white"
+          >
+            <Icon name="phone" class="h-5 w-5" />
+            Call {SITE.phone}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,198 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Hero from "@components/Hero.astro";
+import SectionHeading from "@components/SectionHeading.astro";
+import ServiceCard from "@components/ServiceCard.astro";
+import CTASection from "@components/CTASection.astro";
+import Icon from "@components/Icon.astro";
+import { type IconName } from "@lib/icons";
+import { SITE } from "@data/site";
+
+import heroImage from "@assets/images/mold-inside-wall.jpeg";
+import galleryWall from "@assets/images/mold-wall.jpeg";
+import galleryBathroom from "@assets/images/mold-bathroom.jpeg";
+import galleryKitchen from "@assets/images/mold-kitchen.jpeg";
+import galleryCorners from "@assets/images/mold-corners.jpeg";
+import galleryFloor from "@assets/images/mold-floor.jpeg";
+import galleryTester from "@assets/images/mold-tester.jpeg";
+
+const services = (await getCollection("services")).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const featured = services.filter((s) => s.data.featured);
+
+const steps: { icon: IconName; title: string; text: string }[] = [
+  {
+    icon: "phone",
+    title: "1. Call or Request Online",
+    text: "Reach out and tell us your concern. We schedule your inspection at a time that works for you.",
+  },
+  {
+    icon: "search",
+    title: "2. On-Site Inspection",
+    text: "A certified inspector evaluates your property with thermal imaging and moisture meters.",
+  },
+  {
+    icon: "flask",
+    title: "3. Lab Testing",
+    text: "If needed, we collect samples and send them to an accredited lab for accurate species results.",
+  },
+  {
+    icon: "shield",
+    title: "4. Clear Report",
+    text: "You receive a documented report with honest, pressure-free recommendations.",
+  },
+];
+
+const reasons: { icon: IconName; title: string; text: string }[] = [
+  {
+    icon: "check",
+    title: "Certified Inspectors",
+    text: "Trained, certified professionals who know exactly where mold hides.",
+  },
+  {
+    icon: "flask",
+    title: "Accredited Lab Results",
+    text: "Independent laboratory analysis you can trust and act on.",
+  },
+  {
+    icon: "shield",
+    title: "No-Pressure Reporting",
+    text: "Honest findings without upselling unnecessary remediation.",
+  },
+  {
+    icon: "clock",
+    title: "Fast Turnaround",
+    text: "Quick scheduling and prompt reporting when it matters most.",
+  },
+];
+
+const gallery = [
+  { src: galleryWall, alt: "Mold growth spreading across an interior wall" },
+  { src: galleryBathroom, alt: "Mold buildup in a bathroom corner" },
+  { src: galleryKitchen, alt: "Mold found inside a kitchen cabinet" },
+  { src: galleryCorners, alt: "Inspector checking mold under wall corners" },
+  { src: galleryFloor, alt: "Mold damage along flooring" },
+  { src: galleryTester, alt: "Technician using a professional mold testing device" },
+];
+---
+
+<BaseLayout
+  title={SITE.name}
+  description={SITE.description}
+  image="/og-image.jpg"
+>
+  <Hero
+    eyebrow="Certified & Trusted in South Florida"
+    title="Certified Mold Inspection & Testing in Pembroke Park, FL"
+    subtitle="Protect your home, your business, and your family's health. We find hidden mold fast with thermal imaging, moisture mapping, and accredited lab testing."
+    image={heroImage}
+    imageAlt="Mold discovered inside a damaged interior wall"
+  />
+
+  <!-- Trust bar -->
+  <section class="border-b border-ink-200 bg-ink-50">
+    <div class="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-4 py-8 sm:px-6 lg:grid-cols-4">
+      {
+        reasons.map((reason) => (
+          <div class="flex items-start gap-3">
+            <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-100 text-brand-700">
+              <Icon name={reason.icon} class="h-5 w-5" />
+            </span>
+            <div>
+              <p class="font-semibold text-ink-900">{reason.title}</p>
+              <p class="text-sm text-ink-700">{reason.text}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+    <SectionHeading eyebrow="What We Do" title="Mold Services Built Around Your Peace of Mind">
+      <p class="mt-4 text-lg text-ink-700">
+        From a single musty room to a whole commercial building, our services
+        give you a clear, honest picture of your indoor environment.
+      </p>
+    </SectionHeading>
+
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        featured.map((service) => (
+          <ServiceCard
+            title={service.data.shortTitle}
+            summary={service.data.summary}
+            icon={service.data.icon}
+            href={`/services/${service.id}/`}
+          />
+        ))
+      }
+    </div>
+
+    <div class="mt-10 text-center">
+      <a
+        href="/services/"
+        class="inline-flex items-center gap-1 font-semibold text-brand-700 hover:text-brand-800"
+      >
+        Explore all mold services
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="bg-ink-50">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <SectionHeading eyebrow="How It Works" title="A Simple, Transparent Process" />
+      <ol class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          steps.map((step) => (
+            <li class="rounded-2xl border border-ink-200 bg-white p-6 shadow-sm">
+              <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-600 text-white">
+                <Icon name={step.icon} class="h-6 w-6" />
+              </span>
+              <h3 class="mt-4 text-lg font-bold text-ink-900">{step.title}</h3>
+              <p class="mt-2 text-ink-700">{step.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+    <SectionHeading
+      eyebrow="What Mold Looks Like"
+      title="Real Mold We Help Homeowners Identify"
+    >
+      <p class="mt-4 text-lg text-ink-700">
+        Mold hides in walls, bathrooms, kitchens, and under floors. If anything
+        looks familiar, it is worth getting inspected.
+      </p>
+    </SectionHeading>
+
+    <div class="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3">
+      {
+        gallery.map((item) => (
+          <figure class="overflow-hidden rounded-2xl border border-ink-200 shadow-sm">
+            <Image
+              src={item.src}
+              alt={item.alt}
+              widths={[320, 480, 640]}
+              sizes="(min-width: 768px) 30vw, 45vw"
+              class="aspect-4/3 h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+              loading="lazy"
+            />
+          </figure>
+        ))
+      }
+    </div>
+  </section>
+
+  <CTASection />
+</BaseLayout>

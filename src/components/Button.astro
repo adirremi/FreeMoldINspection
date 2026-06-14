@@ -1,0 +1,66 @@
+---
+/**
+ * Polymorphic button. Renders an <a> when `href` is provided, otherwise a <button>.
+ * Keeps call-to-action styling consistent everywhere (DRY).
+ */
+type Variant = "primary" | "secondary" | "outline";
+type Size = "sm" | "md" | "lg";
+
+interface Props {
+  href?: string;
+  variant?: Variant;
+  size?: Size;
+  type?: "button" | "submit";
+  class?: string;
+  /** Accessible label, useful when the visible text is not descriptive enough. */
+  ariaLabel?: string;
+}
+
+const {
+  href,
+  variant = "primary",
+  size = "md",
+  type = "button",
+  class: className = "",
+  ariaLabel,
+} = Astro.props;
+
+const base =
+  "inline-flex items-center justify-center gap-2 font-semibold rounded-xl transition-colors duration-200 focus-visible:outline-none";
+
+const variants: Record<Variant, string> = {
+  primary:
+    "bg-brand-600 text-white hover:bg-brand-700 active:bg-brand-800 shadow-sm",
+  secondary:
+    "bg-white text-brand-700 hover:bg-brand-50 border border-brand-200",
+  outline:
+    "bg-transparent text-white border-2 border-white/80 hover:bg-white hover:text-brand-700",
+};
+
+const sizes: Record<Size, string> = {
+  sm: "text-sm px-4 py-2",
+  md: "text-base px-5 py-2.5",
+  lg: "text-lg px-7 py-3.5",
+};
+
+const classes = `${base} ${variants[variant]} ${sizes[size]} ${className}`;
+const isExternal = href?.startsWith("http");
+---
+
+{
+  href ? (
+    <a
+      href={href}
+      class={classes}
+      aria-label={ariaLabel}
+      rel={isExternal ? "noopener noreferrer" : undefined}
+      target={isExternal ? "_blank" : undefined}
+    >
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={classes} aria-label={ariaLabel}>
+      <slot />
+    </button>
+  )
+}

@@ -1,0 +1,59 @@
+---
+/**
+ * Global page shell: <head> metadata, skip link, Navbar, page content, Footer.
+ * Every page should render through this layout to stay consistent (DRY).
+ */
+import "../styles/global.css";
+import SEO from "@components/SEO.astro";
+import Navbar from "@components/Navbar.astro";
+import Footer from "@components/Footer.astro";
+import LocalBusinessSchema from "@components/LocalBusinessSchema.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: "website" | "article";
+  noindex?: boolean;
+}
+
+const { title, description, image, type, noindex } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-pt-20">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#059669" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    />
+
+    <SEO title={title} description={description} image={image} type={type} noindex={noindex} />
+    <LocalBusinessSchema />
+  </head>
+
+  <body class="flex min-h-screen flex-col bg-white text-ink-800">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-brand-600 focus:px-4 focus:py-2 focus:text-white"
+    >
+      Skip to main content
+    </a>
+
+    <Navbar />
+
+    <main id="main" class="grow">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>

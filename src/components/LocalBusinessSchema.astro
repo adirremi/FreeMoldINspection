@@ -1,0 +1,43 @@
+---
+/**
+ * Emits LocalBusiness JSON-LD structured data for rich search results.
+ * This is inert data (not executable client JS) — search engines parse it directly.
+ */
+import { SITE, formattedAddress } from "@data/site";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  name: SITE.name,
+  legalName: SITE.legalName,
+  description: SITE.description,
+  url: SITE.url,
+  telephone: SITE.phoneHref.replace("tel:", ""),
+  email: SITE.email,
+  image: new URL("/og-image.jpg", SITE.url).href,
+  priceRange: "$$",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: SITE.address.street,
+    addressLocality: SITE.address.city,
+    addressRegion: SITE.address.state,
+    postalCode: SITE.address.zip,
+    addressCountry: SITE.address.country,
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: SITE.geo.latitude,
+    longitude: SITE.geo.longitude,
+  },
+  areaServed: SITE.areasServed.map((name) => ({ "@type": "City", name })),
+  openingHours: ["Mo-Fr 08:00-18:00", "Sa 09:00-14:00"],
+  sameAs: SITE.social.map((s) => s.href),
+  description_address: formattedAddress(),
+};
+---
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+  is:inline
+/>

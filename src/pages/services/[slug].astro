@@ -1,0 +1,110 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import CTASection from "@components/CTASection.astro";
+import Icon from "@components/Icon.astro";
+
+export async function getStaticPaths() {
+  const services = await getCollection("services");
+  return services.map((service) => ({
+    params: { slug: service.id },
+    props: { service },
+  }));
+}
+
+interface Props {
+  service: CollectionEntry<"services">;
+}
+
+const { service } = Astro.props;
+const { Content } = await render(service);
+
+const related = (await getCollection("services"))
+  .filter((s) => s.id !== service.id)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+---
+
+<BaseLayout
+  title={service.data.title}
+  description={service.data.description}
+  type="article"
+>
+  <!-- Breadcrumb (internal links) -->
+  <nav aria-label="Breadcrumb" class="border-b border-ink-200 bg-ink-50">
+    <ol class="mx-auto flex max-w-6xl flex-wrap items-center gap-2 px-4 py-3 text-sm text-ink-500 sm:px-6">
+      <li><a href="/" class="hover:text-brand-700">Home</a></li>
+      <li aria-hidden="true">/</li>
+      <li><a href="/services/" class="hover:text-brand-700">Services</a></li>
+      <li aria-hidden="true">/</li>
+      <li class="font-medium text-ink-800" aria-current="page">{service.data.shortTitle}</li>
+    </ol>
+  </nav>
+
+  <!-- Header -->
+  <section class="bg-ink-900">
+    <div class="mx-auto max-w-4xl px-4 py-14 sm:px-6 sm:py-16">
+      <span class="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-600 text-white">
+        <Icon name={service.data.icon} class="h-7 w-7" />
+      </span>
+      <h1 class="mt-5 text-4xl font-extrabold text-white sm:text-5xl">
+        {service.data.title}
+      </h1>
+      <p class="mt-4 text-lg text-ink-200">{service.data.description}</p>
+    </div>
+  </section>
+
+  <!-- Body -->
+  <section class="mx-auto max-w-4xl px-4 py-14 sm:px-6 sm:py-16">
+    <div class="grid gap-10 lg:grid-cols-[1fr_18rem]">
+      <article class="prose-content">
+        <div class="space-y-4 text-lg leading-relaxed text-ink-700 [&_h2]:mt-8 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-ink-900">
+          <Content />
+        </div>
+      </article>
+
+      <!-- Benefits sidebar -->
+      <aside class="lg:sticky lg:top-24 lg:self-start">
+        <div class="rounded-2xl border border-ink-200 bg-ink-50 p-6">
+          <h2 class="text-lg font-bold text-ink-900">What's included</h2>
+          <ul class="mt-4 space-y-3">
+            {
+              service.data.benefits.map((benefit) => (
+                <li class="flex items-start gap-2 text-ink-700">
+                  <span class="mt-0.5 text-brand-600">
+                    <Icon name="check" class="h-5 w-5" />
+                  </span>
+                  <span>{benefit}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Related services (internal links) -->
+    <div class="mt-16 border-t border-ink-200 pt-10">
+      <h2 class="text-2xl font-bold text-ink-900">Related Services</h2>
+      <div class="mt-6 grid gap-4 sm:grid-cols-3">
+        {
+          related.map((item) => (
+            <a
+              href={`/services/${item.id}/`}
+              class="group flex items-center gap-3 rounded-xl border border-ink-200 bg-white p-4 transition hover:border-brand-300 hover:shadow-md"
+            >
+              <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-600">
+                <Icon name={item.data.icon} class="h-5 w-5" />
+              </span>
+              <span class="font-semibold text-ink-900 group-hover:text-brand-700">
+                {item.data.shortTitle}
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CTASection title={`Ready to schedule your ${service.data.shortTitle.toLowerCase()}?`} />
+</BaseLayout>

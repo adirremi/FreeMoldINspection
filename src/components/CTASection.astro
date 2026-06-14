@@ -1,0 +1,34 @@
+---
+/**
+ * Reusable conversion band. Used at the bottom of pages to drive phone calls.
+ */
+import { SITE } from "@data/site";
+import Button from "@components/Button.astro";
+import Icon from "@components/Icon.astro";
+
+interface Props {
+  title?: string;
+  text?: string;
+}
+
+const {
+  title = "Worried about mold? Get answers today.",
+  text = "Schedule your certified mold inspection with South Florida's trusted team. Fast scheduling and clear, honest reporting.",
+} = Astro.props;
+---
+
+<section class="bg-brand-700">
+  <div class="mx-auto max-w-6xl px-4 py-14 text-center sm:px-6 sm:py-16">
+    <h2 class="text-3xl font-extrabold text-white sm:text-4xl">{title}</h2>
+    <p class="mx-auto mt-4 max-w-2xl text-lg text-brand-100">{text}</p>
+    <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <Button href={SITE.phoneHref} variant="secondary" size="lg">
+        <Icon name="phone" class="h-5 w-5" />
+        Call {SITE.phone}
+      </Button>
+      <Button href="/contact/" variant="outline" size="lg">
+        Request an Inspection
+      </Button>
+    </div>
+  </div>
+</section>

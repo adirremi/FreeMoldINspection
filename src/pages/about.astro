@@ -1,0 +1,121 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import SectionHeading from "@components/SectionHeading.astro";
+import CTASection from "@components/CTASection.astro";
+import Icon from "@components/Icon.astro";
+import { type IconName } from "@lib/icons";
+import { SITE } from "@data/site";
+import aboutImage from "@assets/images/mold-laser.jpeg";
+
+const values: { icon: IconName; title: string; text: string }[] = [
+  {
+    icon: "shield",
+    title: "Integrity First",
+    text: "We report what we find — nothing more, nothing less. No scare tactics, no unnecessary upsells.",
+  },
+  {
+    icon: "search",
+    title: "Thorough by Default",
+    text: "Every inspection covers the whole property, not just the obvious spots.",
+  },
+  {
+    icon: "flask",
+    title: "Science-Backed",
+    text: "We rely on accredited lab analysis and calibrated equipment for objective answers.",
+  },
+  {
+    icon: "home",
+    title: "Community Focused",
+    text: "We live and work in South Florida and treat every property like our own.",
+  },
+];
+---
+
+<BaseLayout
+  title="About Us"
+  description="Learn about Free Mold Inspection — certified mold inspectors serving Pembroke Park and Broward County with honest, science-backed reporting."
+>
+  <!-- Page header -->
+  <section class="bg-ink-900">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <p class="text-sm font-bold uppercase tracking-wider text-brand-400">About Us</p>
+      <h1 class="mt-2 max-w-3xl text-4xl font-extrabold text-white sm:text-5xl">
+        South Florida's Trusted Name in Mold Inspection
+      </h1>
+      <p class="mt-5 max-w-2xl text-lg text-ink-200">
+        {SITE.name} was built on a simple idea: every family and business
+        deserves honest answers about the air they breathe and the spaces they
+        live in.
+      </p>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+    <div class="grid items-center gap-10 lg:grid-cols-2">
+      <div>
+        <SectionHeading align="left" eyebrow="Our Mission" title="Clarity you can trust">
+          <div class="mt-4 space-y-4 text-lg text-ink-700">
+            <p>
+              Mold is one of the most misunderstood problems a property owner can
+              face. Too often, homeowners are pushed into expensive remediation
+              before anyone confirms there is even a problem.
+            </p>
+            <p>
+              We do things differently. Our certified inspectors combine careful
+              visual assessment, thermal imaging, and accredited laboratory
+              testing to give you the full picture — then we let the facts guide
+              your next step.
+            </p>
+            <p>
+              Whether you are buying a home, managing a commercial building, or
+              simply noticed a musty smell, we are here to help you decide with
+              confidence.
+            </p>
+          </div>
+        </SectionHeading>
+        <div class="mt-8">
+          <a
+            href="/services/"
+            class="inline-flex items-center gap-1 font-semibold text-brand-700 hover:text-brand-800"
+          >
+            See how we can help
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <Image
+        src={aboutImage}
+        alt="Inspector using a laser tool to assess mold and moisture levels"
+        widths={[480, 720, 960]}
+        sizes="(min-width: 1024px) 45vw, 100vw"
+        class="aspect-4/3 w-full rounded-2xl object-cover shadow-md"
+        loading="lazy"
+      />
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="bg-ink-50">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <SectionHeading eyebrow="What We Stand For" title="Values That Guide Every Inspection" />
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          values.map((value) => (
+            <div class="rounded-2xl border border-ink-200 bg-white p-6 shadow-sm">
+              <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-brand-100">
+                <Icon name={value.icon} class="h-6 w-6" />
+              </span>
+              <h3 class="mt-4 text-lg font-bold text-ink-900">{value.title}</h3>
+              <p class="mt-2 text-ink-700">{value.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CTASection title="Have questions about mold in your property?" />
+</BaseLayout>

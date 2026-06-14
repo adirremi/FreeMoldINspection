@@ -1,0 +1,79 @@
+---
+/**
+ * Reusable hero banner with an optimized background image and overlaid content.
+ * Content (eyebrow, heading, CTAs) is passed via props/slots so it stays generic.
+ */
+import { Image } from "astro:assets";
+import { SITE } from "@data/site";
+import Button from "@components/Button.astro";
+import Icon from "@components/Icon.astro";
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  image: ImageMetadata;
+  imageAlt: string;
+  primaryHref?: string;
+  primaryLabel?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  subtitle,
+  image,
+  imageAlt,
+  primaryHref = SITE.phoneHref,
+  primaryLabel = `Call ${SITE.phone}`,
+  secondaryHref = "/services/",
+  secondaryLabel = "View Services",
+} = Astro.props;
+---
+
+<section class="relative isolate overflow-hidden bg-ink-900">
+  <Image
+    src={image}
+    alt={imageAlt}
+    class="absolute inset-0 -z-10 h-full w-full object-cover opacity-35"
+    loading="eager"
+    fetchpriority="high"
+    widths={[640, 960, 1280, 1920]}
+    sizes="100vw"
+  />
+  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-ink-900/90 via-ink-900/70 to-brand-900/40"></div>
+
+  <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28 lg:py-36">
+    <div class="max-w-2xl">
+      {
+        eyebrow && (
+          <p class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-brand-200 ring-1 ring-white/20">
+            <Icon name="shield" class="h-4 w-4" />
+            {eyebrow}
+          </p>
+        )
+      }
+      <h1 class="mt-5 text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+        {title}
+      </h1>
+      {
+        subtitle && (
+          <p class="mt-5 text-lg leading-relaxed text-ink-200 sm:text-xl">
+            {subtitle}
+          </p>
+        )
+      }
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <Button href={primaryHref} variant="primary" size="lg">
+          <Icon name="phone" class="h-5 w-5" />
+          {primaryLabel}
+        </Button>
+        <Button href={secondaryHref} variant="outline" size="lg">
+          {secondaryLabel}
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>

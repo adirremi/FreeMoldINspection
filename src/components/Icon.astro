@@ -1,0 +1,28 @@
+---
+/**
+ * Inline SVG icon. Renders zero client-side JS and stays crisp at any size.
+ * Icon names and path data live in `src/lib/icons.ts`.
+ */
+import { ICON_PATHS, type IconName } from "@lib/icons";
+
+interface Props {
+  name: IconName;
+  class?: string;
+}
+
+const { name, class: className = "h-6 w-6" } = Astro.props;
+---
+
+<svg
+  class={className}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.8"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path d={ICON_PATHS[name]} />
+</svg>

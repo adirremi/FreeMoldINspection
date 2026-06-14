@@ -1,0 +1,29 @@
+---
+/**
+ * Generic content card. A small, reusable surface used to compose richer
+ * components such as ServiceCard and feature highlights.
+ */
+interface Props {
+  as?: "div" | "article" | "li";
+  href?: string;
+  class?: string;
+}
+
+const { as: Tag = "div", href, class: className = "" } = Astro.props;
+
+const base =
+  "group relative rounded-2xl border border-ink-200 bg-white p-6 shadow-sm transition duration-200";
+const interactive = href
+  ? "hover:-translate-y-1 hover:shadow-lg hover:border-brand-300"
+  : "";
+const classes = `${base} ${interactive} ${className}`;
+---
+
+<Tag class={classes}>
+  {
+    href && (
+      <a href={href} class="absolute inset-0 z-10 rounded-2xl" aria-hidden="true" tabindex="-1" />
+    )
+  }
+  <slot />
+</Tag>

@@ -1,0 +1,151 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Button from "@components/Button.astro";
+import Icon from "@components/Icon.astro";
+import { SITE, formattedAddress } from "@data/site";
+
+const mapQuery = encodeURIComponent(
+  `${SITE.address.street}, ${SITE.address.city}, ${SITE.address.state} ${SITE.address.zip}`
+);
+---
+
+<BaseLayout
+  title="Contact Us"
+  description="Contact Free Mold Inspection in Pembroke Park, FL. Call (888) 800-4980 or request your mold inspection online. Serving Broward and Miami-Dade County."
+>
+  <section class="bg-ink-900">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <p class="text-sm font-bold uppercase tracking-wider text-brand-400">Contact</p>
+      <h1 class="mt-2 max-w-3xl text-4xl font-extrabold text-white sm:text-5xl">
+        Request Your Mold Inspection
+      </h1>
+      <p class="mt-5 max-w-2xl text-lg text-ink-200">
+        Call now or send a message and we'll get back to you quickly to schedule
+        your inspection.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+    <div class="grid gap-12 lg:grid-cols-2">
+      <!-- Contact details -->
+      <div>
+        <h2 class="text-2xl font-bold text-ink-900">Get in touch</h2>
+        <ul class="mt-6 space-y-5">
+          <li class="flex items-start gap-4">
+            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-brand-100">
+              <Icon name="phone" class="h-5 w-5" />
+            </span>
+            <div>
+              <p class="font-semibold text-ink-900">Phone</p>
+              <a href={SITE.phoneHref} class="text-brand-700 hover:underline">{SITE.phone}</a>
+            </div>
+          </li>
+          <li class="flex items-start gap-4">
+            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-brand-100">
+              <Icon name="mail" class="h-5 w-5" />
+            </span>
+            <div>
+              <p class="font-semibold text-ink-900">Email</p>
+              <a href={`mailto:${SITE.email}`} class="text-brand-700 hover:underline">{SITE.email}</a>
+            </div>
+          </li>
+          <li class="flex items-start gap-4">
+            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-brand-100">
+              <Icon name="map-pin" class="h-5 w-5" />
+            </span>
+            <div>
+              <p class="font-semibold text-ink-900">Office</p>
+              <p class="text-ink-700">{formattedAddress()}</p>
+            </div>
+          </li>
+          <li class="flex items-start gap-4">
+            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-brand-100">
+              <Icon name="clock" class="h-5 w-5" />
+            </span>
+            <div>
+              <p class="font-semibold text-ink-900">Hours</p>
+              <ul class="text-ink-700">
+                {SITE.hours.map((line) => <li>{line}</li>)}
+              </ul>
+            </div>
+          </li>
+        </ul>
+
+        <div class="mt-8 overflow-hidden rounded-2xl border border-ink-200">
+          <iframe
+            title={`Map showing ${SITE.name} office location`}
+            src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
+            width="100%"
+            height="280"
+            style="border:0;"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+
+      <!-- Contact form -->
+      <div>
+        <h2 class="text-2xl font-bold text-ink-900">Send a message</h2>
+        <p class="mt-2 text-ink-700">
+          Replace the form action below with your form endpoint (e.g. Formspree)
+          before going live.
+        </p>
+        <form
+          action="https://formspree.io/f/your-form-id"
+          method="POST"
+          class="mt-6 space-y-5"
+        >
+          <div>
+            <label for="name" class="block text-sm font-semibold text-ink-900">Full name</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              autocomplete="name"
+              class="mt-1.5 w-full rounded-xl border border-ink-300 px-4 py-2.5 text-ink-900 focus-visible:border-brand-500"
+            />
+          </div>
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label for="email" class="block text-sm font-semibold text-ink-900">Email</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                autocomplete="email"
+                class="mt-1.5 w-full rounded-xl border border-ink-300 px-4 py-2.5 text-ink-900 focus-visible:border-brand-500"
+              />
+            </div>
+            <div>
+              <label for="phone" class="block text-sm font-semibold text-ink-900">Phone</label>
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                autocomplete="tel"
+                class="mt-1.5 w-full rounded-xl border border-ink-300 px-4 py-2.5 text-ink-900 focus-visible:border-brand-500"
+              />
+            </div>
+          </div>
+          <div>
+            <label for="message" class="block text-sm font-semibold text-ink-900">How can we help?</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              required
+              class="mt-1.5 w-full rounded-xl border border-ink-300 px-4 py-2.5 text-ink-900 focus-visible:border-brand-500"
+            ></textarea>
+          </div>
+          <Button type="submit" variant="primary" size="lg" class="w-full">
+            Request Inspection
+          </Button>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

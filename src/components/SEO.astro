@@ -1,0 +1,54 @@
+---
+/**
+ * Dynamic SEO component.
+ * Centralizes <title>, meta description, canonical URL, Open Graph, and Twitter Card tags.
+ * Use on every page through BaseLayout so metadata stays consistent and DRY.
+ */
+import { SITE } from "@data/site";
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Path or absolute URL to the social share image. */
+  image?: string;
+  /** Open Graph type, e.g. "website" or "article". */
+  type?: "website" | "article";
+  /** Set true on pages that should not be indexed (e.g. 404). */
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = SITE.description,
+  image = "/og-image.jpg",
+  type = "website",
+  noindex = false,
+} = Astro.props;
+
+const fullTitle =
+  title === SITE.name ? title : `${title} | ${SITE.name}`;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? SITE.url);
+const socialImage = new URL(image, Astro.site ?? SITE.url);
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL.href} />
+
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Open Graph -->
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalURL.href} />
+<meta property="og:image" content={socialImage.href} />
+<meta property="og:locale" content="en_US" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={socialImage.href} />
