@@ -17,6 +17,11 @@ export interface SiteConfig {
   readonly phone: string;
   readonly phoneHref: string;
   readonly email: string;
+  /**
+   * Web3Forms access key for the contact form (https://web3forms.com).
+   * Create a free key with the address below and paste it here.
+   */
+  readonly web3formsKey: string;
   readonly address: {
     readonly street: string;
     readonly city: string;
@@ -43,7 +48,8 @@ export const SITE: SiteConfig = {
   url: "https://www.freemoldinspection.com",
   phone: "(888) 800-4980",
   phoneHref: "tel:+18888004980",
-  email: "info@freemoldinspection.com",
+  email: "Freemoldinspection1@gmail.com",
+  web3formsKey: "YOUR_WEB3FORMS_ACCESS_KEY",
   address: {
     street: "4077 SW 40th Ave",
     city: "Pembroke Park",
