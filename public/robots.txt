@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.freemoldinspection.com/sitemap-index.xml
+Sitemap: https://free-mold-i-nspection.vercel.app/sitemap-index.xml

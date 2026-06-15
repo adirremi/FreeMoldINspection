@@ -25,8 +25,9 @@ const {
   noindex = false,
 } = Astro.props;
 
-const fullTitle =
-  title === SITE.name ? title : `${title} | ${SITE.name}`;
+const fullTitle = title.includes(SITE.name)
+  ? title
+  : `${title} | ${SITE.name}`;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? SITE.url);
 const socialImage = new URL(image, Astro.site ?? SITE.url);

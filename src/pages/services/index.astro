@@ -4,6 +4,8 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import SectionHeading from "@components/SectionHeading.astro";
 import ServiceCard from "@components/ServiceCard.astro";
 import CTASection from "@components/CTASection.astro";
+import FAQ from "@components/FAQ.astro";
+import { GENERAL_FAQS } from "@lib/faqs";
 
 const services = (await getCollection("services")).sort(
   (a, b) => a.data.order - b.data.order
@@ -11,8 +13,8 @@ const services = (await getCollection("services")).sort(
 ---
 
 <BaseLayout
-  title="Mold Inspection Services"
-  description="Explore our full range of mold services: comprehensive inspection, laboratory testing, indoor air quality testing, moisture assessment, and residential & commercial inspections."
+  title="Mold Inspection Services in Pembroke Park, FL"
+  description="Explore our mold services: inspection, lab testing, air quality testing, moisture assessment, and residential & commercial inspections."
 >
   <section class="bg-ink-900">
     <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
@@ -28,7 +30,17 @@ const services = (await getCollection("services")).sort(
   </section>
 
   <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-    <SectionHeading eyebrow="Our Offerings" title="Find the Right Service for You" />
+    <SectionHeading eyebrow="Our Offerings" title="Find the Right Service for You">
+      <p class="mt-4 text-lg text-ink-700">
+        Every property and every concern is a little different. That is why we
+        offer a complete range of mold services — from a focused visual
+        inspection to accredited laboratory testing and indoor air quality
+        analysis. Whether you are a homeowner who noticed a musty smell, a buyer
+        protecting a major investment, or a business owner safeguarding your
+        space, there is a service designed for your situation.
+      </p>
+    </SectionHeading>
+
     <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {
         services.map((service) => (
@@ -41,7 +53,40 @@ const services = (await getCollection("services")).sort(
         ))
       }
     </div>
+
+    <div class="mx-auto mt-16 max-w-3xl space-y-4 text-lg text-ink-700">
+      <h2 class="text-2xl font-bold text-ink-900">
+        How to choose the right mold service
+      </h2>
+      <p>
+        If you have visible growth or a recurring musty odor, a
+        <a href="/services/mold-inspection/" class="font-semibold text-brand-700 hover:underline"> comprehensive mold inspection </a>
+        is the best place to start. It gives you a complete, photo-documented
+        picture of your property using thermal imaging and moisture meters.
+      </p>
+      <p>
+        When you need to know exactly what kind of mold is present — or you need
+        formal documentation — add
+        <a href="/services/mold-testing/" class="font-semibold text-brand-700 hover:underline"> laboratory mold testing</a>.
+        If household members have unexplained allergy or respiratory symptoms,
+        <a href="/services/air-quality-testing/" class="font-semibold text-brand-700 hover:underline"> indoor air quality testing </a>
+        measures the spores actually circulating in your air.
+      </p>
+      <p>
+        Because mold always needs moisture, a
+        <a href="/services/water-damage-assessment/" class="font-semibold text-brand-700 hover:underline"> water damage and moisture assessment </a>
+        helps fix the root cause so the problem does not return. And whether you
+        own a home or run a business, our
+        <a href="/services/residential-mold-inspection/" class="font-semibold text-brand-700 hover:underline"> residential </a>
+        and
+        <a href="/services/commercial-mold-inspection/" class="font-semibold text-brand-700 hover:underline"> commercial </a>
+        inspections are tailored to your property. Not sure which one fits? Call
+        us and we will help you decide — with no pressure and no upselling.
+      </p>
+    </div>
   </section>
+
+  <FAQ faqs={GENERAL_FAQS} />
 
   <CTASection title="Not sure which service you need?" />
 </BaseLayout>

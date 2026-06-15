@@ -1,43 +1,78 @@
 ---
 /**
- * Emits LocalBusiness JSON-LD structured data for rich search results.
- * This is inert data (not executable client JS) — search engines parse it directly.
+ * Emits a JSON-LD @graph with Organization, LocalBusiness, and WebSite nodes.
+ * This gives search engines and AI systems a clear model of the brand,
+ * the physical business, and the site. Inert data — not executable client JS.
  */
-import { SITE, formattedAddress } from "@data/site";
+import { SITE } from "@data/site";
 
-const schema = {
+const orgId = `${SITE.url}/#organization`;
+const businessId = `${SITE.url}/#localbusiness`;
+const websiteId = `${SITE.url}/#website`;
+const logoUrl = new URL("/favicon.svg", SITE.url).href;
+const imageUrl = new URL("/og-image.jpg", SITE.url).href;
+const telephone = SITE.phoneHref.replace("tel:", "");
+
+const postalAddress = {
+  "@type": "PostalAddress",
+  streetAddress: SITE.address.street,
+  addressLocality: SITE.address.city,
+  addressRegion: SITE.address.state,
+  postalCode: SITE.address.zip,
+  addressCountry: SITE.address.country,
+};
+
+const graph = {
   "@context": "https://schema.org",
-  "@type": "HomeAndConstructionBusiness",
-  name: SITE.name,
-  legalName: SITE.legalName,
-  description: SITE.description,
-  url: SITE.url,
-  telephone: SITE.phoneHref.replace("tel:", ""),
-  email: SITE.email,
-  image: new URL("/og-image.jpg", SITE.url).href,
-  priceRange: "$$",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: SITE.address.street,
-    addressLocality: SITE.address.city,
-    addressRegion: SITE.address.state,
-    postalCode: SITE.address.zip,
-    addressCountry: SITE.address.country,
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: SITE.geo.latitude,
-    longitude: SITE.geo.longitude,
-  },
-  areaServed: SITE.areasServed.map((name) => ({ "@type": "City", name })),
-  openingHours: ["Mo-Fr 08:00-18:00", "Sa 09:00-14:00"],
-  sameAs: SITE.social.map((s) => s.href),
-  description_address: formattedAddress(),
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": orgId,
+      name: SITE.name,
+      legalName: SITE.legalName,
+      url: SITE.url,
+      logo: { "@type": "ImageObject", url: logoUrl },
+      image: imageUrl,
+      email: SITE.email,
+      telephone,
+      description: SITE.description,
+      address: postalAddress,
+      sameAs: SITE.social.map((s) => s.href),
+    },
+    {
+      "@type": "HomeAndConstructionBusiness",
+      "@id": businessId,
+      name: SITE.name,
+      parentOrganization: { "@id": orgId },
+      url: SITE.url,
+      image: imageUrl,
+      telephone,
+      email: SITE.email,
+      priceRange: "$$",
+      description: SITE.description,
+      address: postalAddress,
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: SITE.geo.latitude,
+        longitude: SITE.geo.longitude,
+      },
+      areaServed: SITE.areasServed.map((name) => ({ "@type": "City", name })),
+      openingHours: ["Mo-Fr 08:00-18:00", "Sa 09:00-14:00"],
+    },
+    {
+      "@type": "WebSite",
+      "@id": websiteId,
+      url: SITE.url,
+      name: SITE.name,
+      publisher: { "@id": orgId },
+      inLanguage: "en-US",
+    },
+  ],
 };
 ---
 
 <script
   type="application/ld+json"
-  set:html={JSON.stringify(schema)}
+  set:html={JSON.stringify(graph)}
   is:inline
 />

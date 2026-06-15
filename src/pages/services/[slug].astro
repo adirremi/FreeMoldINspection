@@ -2,6 +2,7 @@
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import CTASection from "@components/CTASection.astro";
+import FAQ from "@components/FAQ.astro";
 import Icon from "@components/Icon.astro";
 
 export async function getStaticPaths() {
@@ -105,6 +106,12 @@ const related = (await getCollection("services"))
       </div>
     </div>
   </section>
+
+  {
+    service.data.faqs.length > 0 && (
+      <FAQ faqs={service.data.faqs} title={`${service.data.shortTitle} FAQs`} />
+    )
+  }
 
   <CTASection title={`Ready to schedule your ${service.data.shortTitle.toLowerCase()}?`} />
 </BaseLayout>

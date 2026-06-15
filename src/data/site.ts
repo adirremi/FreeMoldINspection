@@ -44,8 +44,9 @@ export const SITE: SiteConfig = {
   legalName: "Free Mold Inspection",
   tagline: "Certified Mold Inspection & Testing in South Florida",
   description:
-    "Free Mold Inspection provides certified mold inspections, lab testing, and air quality assessments across Pembroke Park, Hollywood, and Broward County, FL. Fast, honest, and thorough reporting.",
-  url: "https://www.freemoldinspection.com",
+    "Certified mold inspection, testing & air quality assessments in Pembroke Park & Broward County, FL. Fast, honest, and thorough reporting.",
+  url:
+    import.meta.env.PUBLIC_SITE_URL ?? "https://free-mold-i-nspection.vercel.app",
   phone: "(888) 800-4980",
   phoneHref: "tel:+18888004980",
   email: "Freemoldinspection1@gmail.com",

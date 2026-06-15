@@ -6,8 +6,10 @@ import Hero from "@components/Hero.astro";
 import SectionHeading from "@components/SectionHeading.astro";
 import ServiceCard from "@components/ServiceCard.astro";
 import CTASection from "@components/CTASection.astro";
+import FAQ from "@components/FAQ.astro";
 import Icon from "@components/Icon.astro";
 import { type IconName } from "@lib/icons";
+import { GENERAL_FAQS } from "@lib/faqs";
 import { SITE } from "@data/site";
 
 import heroImage from "@assets/images/mold-inside-wall.jpeg";
@@ -80,7 +82,7 @@ const gallery = [
 ---
 
 <BaseLayout
-  title={SITE.name}
+  title="Free Mold Inspection | Certified Mold Testing in Pembroke Park, FL"
   description={SITE.description}
   image="/og-image.jpg"
 >
@@ -193,6 +195,8 @@ const gallery = [
       }
     </div>
   </section>
+
+  <FAQ faqs={GENERAL_FAQS} />
 
   <CTASection />
 </BaseLayout>

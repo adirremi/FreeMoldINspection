@@ -2,8 +2,10 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 
-// Update this to the production domain before deploying to Vercel.
-const SITE_URL = "https://www.freemoldinspection.com";
+// Canonical site URL. Defaults to the live Vercel domain and can be overridden
+// with a PUBLIC_SITE_URL environment variable once a custom domain is connected.
+const SITE_URL =
+  process.env.PUBLIC_SITE_URL ?? "https://free-mold-i-nspection.vercel.app";
 
 export default defineConfig({
   site: SITE_URL,

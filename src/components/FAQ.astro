@@ -1,0 +1,68 @@
+---
+/**
+ * Accessible FAQ accordion (native <details>, zero client-side JS).
+ * Also emits FAQPage JSON-LD so search engines and AI systems can parse the Q&A.
+ */
+import type { FAQ } from "@lib/faqs";
+import SectionHeading from "@components/SectionHeading.astro";
+
+interface Props {
+  faqs: readonly FAQ[];
+  title?: string;
+  eyebrow?: string;
+}
+
+const { faqs, title = "Frequently Asked Questions", eyebrow = "FAQ" } =
+  Astro.props;
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+---
+
+<section class="bg-white">
+  <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
+    <SectionHeading eyebrow={eyebrow} title={title} />
+
+    <dl class="mt-10 divide-y divide-ink-200 border-y border-ink-200">
+      {
+        faqs.map((faq) => (
+          <div class="py-2">
+            <details class="group">
+              <summary class="flex cursor-pointer items-center justify-between gap-4 py-4 text-left text-lg font-semibold text-ink-900 marker:content-none [&::-webkit-details-marker]:hidden">
+                <dt>{faq.question}</dt>
+                <svg
+                  class="h-5 w-5 shrink-0 text-brand-600 transition-transform duration-200 group-open:rotate-45"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  aria-hidden="true"
+                >
+                  <path d="M12 5v14M5 12h14" />
+                </svg>
+              </summary>
+              <dd class="pb-4 pr-8 text-ink-700">{faq.answer}</dd>
+            </details>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(faqSchema)}
+    is:inline
+  />
+</section>

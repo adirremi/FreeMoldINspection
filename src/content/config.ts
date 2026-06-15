@@ -24,6 +24,14 @@ const services = defineCollection({
     order: z.number().int().positive(),
     featured: z.boolean().default(false),
     benefits: z.array(z.string()).min(1),
+    faqs: z
+      .array(
+        z.object({
+          question: z.string(),
+          answer: z.string(),
+        })
+      )
+      .default([]),
   }),
 });
 
