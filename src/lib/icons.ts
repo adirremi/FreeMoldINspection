@@ -16,7 +16,9 @@ export type IconName =
   | "clock"
   | "check"
   | "menu"
-  | "star";
+  | "star"
+  | "chat"
+  | "swab";
 
 export const ICON_PATHS: Record<IconName, string> = {
   search: "M21 21l-4.35-4.35M11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z",
@@ -35,4 +37,6 @@ export const ICON_PATHS: Record<IconName, string> = {
   check: "M5 12l5 5L20 7",
   menu: "M3 6h18M3 12h18M3 18h18",
   star: "M12 3l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.8 6.2 21l1.1-6.5L2.6 9.8l6.5-.9L12 3Z",
+  chat: "M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.9-.9L3 20l1-4.1A8.4 8.4 0 0 1 3 11.5a8.5 8.5 0 0 1 9-8.4 8.4 8.4 0 0 1 9 8.4Z",
+  swab: "M8 16l8-8M5 19a2.2 2.2 0 1 0 3.1-3.1A2.2 2.2 0 0 0 5 19ZM15.9 8.1a2.2 2.2 0 1 0 3.1-3.1 2.2 2.2 0 0 0-3.1 3.1Z",
 };

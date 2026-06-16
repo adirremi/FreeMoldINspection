@@ -1,17 +1,31 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-50: #ecfdf5;
-  --color-brand-100: #d1fae5;
-  --color-brand-200: #a7f3d0;
-  --color-brand-300: #6ee7b7;
-  --color-brand-400: #34d399;
-  --color-brand-500: #10b981;
-  --color-brand-600: #059669;
-  --color-brand-700: #047857;
-  --color-brand-800: #065f46;
-  --color-brand-900: #064e3b;
-  --color-brand-950: #022c22;
+  /* Brand blue — primary color, sampled from the Free Mold Inspection logo. */
+  --color-brand-50: #ecf6fc;
+  --color-brand-100: #cee9f9;
+  --color-brand-200: #a1d4f2;
+  --color-brand-300: #67b9e8;
+  --color-brand-400: #2f9cda;
+  --color-brand-500: #1885c9;
+  --color-brand-600: #146fa8;
+  --color-brand-700: #115a89;
+  --color-brand-800: #124b71;
+  --color-brand-900: #133d5c;
+  --color-brand-950: #0c2638;
+
+  /* Accent green — secondary color from the logo shield and "MOLD" wordmark. */
+  --color-accent-50: #eef7ec;
+  --color-accent-100: #d5ecd0;
+  --color-accent-200: #aedaa5;
+  --color-accent-300: #80c173;
+  --color-accent-400: #59a54a;
+  --color-accent-500: #3f8b38;
+  --color-accent-600: #327a31;
+  --color-accent-700: #2a6228;
+  --color-accent-800: #244f23;
+  --color-accent-900: #1f411f;
+  --color-accent-950: #0c220c;
 
   --color-ink-50: #f8fafc;
   --color-ink-100: #f1f5f9;

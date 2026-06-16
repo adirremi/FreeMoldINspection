@@ -16,6 +16,7 @@ export interface SiteConfig {
   readonly url: string;
   readonly phone: string;
   readonly phoneHref: string;
+  readonly smsHref: string;
   readonly email: string;
   /**
    * Web3Forms access key for the contact form (https://web3forms.com).
@@ -49,6 +50,7 @@ export const SITE: SiteConfig = {
     import.meta.env.PUBLIC_SITE_URL ?? "https://free-mold-i-nspection.vercel.app",
   phone: "(888) 800-4980",
   phoneHref: "tel:+18888004980",
+  smsHref: "sms:+18888004980",
   email: "Freemoldinspection1@gmail.com",
   web3formsKey: "YOUR_WEB3FORMS_ACCESS_KEY",
   address: {

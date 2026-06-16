@@ -12,18 +12,26 @@ import Icon from "@components/Icon.astro";
   class="fixed inset-x-0 bottom-0 z-40 border-t border-ink-200 bg-white/95 shadow-[0_-4px_16px_rgba(0,0,0,0.08)] backdrop-blur md:hidden"
   style="padding-bottom: env(safe-area-inset-bottom);"
 >
-  <div class="grid grid-cols-2 gap-2 p-2.5">
+  <div class="grid grid-cols-3 gap-2 p-2.5">
     <a
       href={SITE.phoneHref}
-      class="flex min-h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-3 py-3 text-base font-semibold text-white active:bg-brand-800"
+      class="flex min-h-12 flex-col items-center justify-center gap-0.5 rounded-xl bg-brand-600 px-2 py-2 text-sm font-semibold text-white active:bg-brand-800"
       aria-label={`Call ${SITE.name} at ${SITE.phone}`}
     >
       <Icon name="phone" class="h-5 w-5" />
-      Call Now
+      Call
+    </a>
+    <a
+      href={SITE.smsHref}
+      class="flex min-h-12 flex-col items-center justify-center gap-0.5 rounded-xl bg-accent-600 px-2 py-2 text-sm font-semibold text-white active:bg-accent-800"
+      aria-label={`Text ${SITE.name} at ${SITE.phone}`}
+    >
+      <Icon name="chat" class="h-5 w-5" />
+      Text
     </a>
     <a
       href="/contact/"
-      class="flex min-h-12 items-center justify-center gap-2 rounded-xl border border-brand-300 bg-brand-50 px-3 py-3 text-base font-semibold text-brand-700 active:bg-brand-100"
+      class="flex min-h-12 flex-col items-center justify-center gap-0.5 rounded-xl border border-brand-300 bg-brand-50 px-2 py-2 text-sm font-semibold text-brand-700 active:bg-brand-100"
     >
       <Icon name="mail" class="h-5 w-5" />
       Request

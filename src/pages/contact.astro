@@ -23,6 +23,16 @@ const mapQuery = encodeURIComponent(
         Call now or send a message and we'll get back to you quickly to schedule
         your inspection.
       </p>
+      <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+        <Button href={SITE.phoneHref} variant="primary" size="lg">
+          <Icon name="phone" class="h-5 w-5" />
+          Call {SITE.phone}
+        </Button>
+        <Button href={SITE.smsHref} variant="primary" size="lg" class="!bg-accent-600 hover:!bg-accent-700">
+          <Icon name="chat" class="h-5 w-5" />
+          Text the 888 number
+        </Button>
+      </div>
     </div>
   </section>
 
@@ -33,7 +43,7 @@ const mapQuery = encodeURIComponent(
         <h2 class="text-2xl font-bold text-ink-900">Get in touch</h2>
         <ul class="mt-6 space-y-5">
           <li class="flex items-start gap-4">
-            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-brand-100">
+            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-50 text-accent-600 ring-1 ring-accent-100">
               <Icon name="phone" class="h-5 w-5" />
             </span>
             <div>
@@ -42,7 +52,16 @@ const mapQuery = encodeURIComponent(
             </div>
           </li>
           <li class="flex items-start gap-4">
-            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-brand-100">
+            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-50 text-accent-600 ring-1 ring-accent-100">
+              <Icon name="chat" class="h-5 w-5" />
+            </span>
+            <div>
+              <p class="font-semibold text-ink-900">Text message</p>
+              <a href={SITE.smsHref} class="text-brand-700 hover:underline">Send a text to {SITE.phone}</a>
+            </div>
+          </li>
+          <li class="flex items-start gap-4">
+            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-50 text-accent-600 ring-1 ring-accent-100">
               <Icon name="mail" class="h-5 w-5" />
             </span>
             <div>
@@ -51,7 +70,7 @@ const mapQuery = encodeURIComponent(
             </div>
           </li>
           <li class="flex items-start gap-4">
-            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-brand-100">
+            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-50 text-accent-600 ring-1 ring-accent-100">
               <Icon name="map-pin" class="h-5 w-5" />
             </span>
             <div>
@@ -60,7 +79,7 @@ const mapQuery = encodeURIComponent(
             </div>
           </li>
           <li class="flex items-start gap-4">
-            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-brand-100">
+            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-50 text-accent-600 ring-1 ring-accent-100">
               <Icon name="clock" class="h-5 w-5" />
             </span>
             <div>

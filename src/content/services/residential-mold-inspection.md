@@ -4,7 +4,7 @@ shortTitle: "Residential"
 summary: "Protect your home and family with a thorough residential inspection."
 description: "Residential mold inspections for homes, condos, and apartments, including pre-purchase and pre-sale evaluations across South Florida."
 icon: "home"
-order: 5
+order: 6
 featured: false
 benefits:
   - "Single-family homes, condos, and apartments"

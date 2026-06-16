@@ -20,6 +20,7 @@ const services = defineCollection({
       "droplet",
       "home",
       "shield",
+      "swab",
     ]),
     order: z.number().int().positive(),
     featured: z.boolean().default(false),

@@ -4,7 +4,7 @@ shortTitle: "Moisture Assessment"
 summary: "Pinpoint the moisture sources that let mold grow in the first place."
 description: "We trace leaks, humidity, and water intrusion with moisture meters and thermal imaging so the root cause of mold can be fixed for good."
 icon: "droplet"
-order: 4
+order: 5
 featured: false
 benefits:
   - "Moisture mapping with calibrated meters"

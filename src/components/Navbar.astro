@@ -6,7 +6,7 @@
 import { SITE } from "@data/site";
 import Icon from "@components/Icon.astro";
 import { Image } from "astro:assets";
-import logo from "@assets/images/logo.jpeg";
+import logo from "@assets/images/logo-horizontal.png";
 
 const currentPath = Astro.url.pathname;
 
@@ -21,18 +21,15 @@ function isActive(href: string): boolean {
     class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6"
     aria-label="Primary"
   >
-    <a href="/" class="flex items-center gap-3" aria-label={`${SITE.name} home`}>
+    <a href="/" class="flex items-center" aria-label={`${SITE.name} home`}>
       <Image
         src={logo}
         alt={`${SITE.name} logo`}
-        width={48}
-        height={48}
-        class="h-11 w-11 rounded-lg object-cover"
+        width={520}
+        height={152}
+        class="h-11 w-auto sm:h-14"
         loading="eager"
       />
-      <span class="text-base font-extrabold leading-tight text-ink-900 sm:text-lg">
-        Free Mold<span class="text-brand-600"> Inspection</span>
-      </span>
     </a>
 
     <!-- Desktop links -->

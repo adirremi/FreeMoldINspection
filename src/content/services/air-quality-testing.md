@@ -4,7 +4,7 @@ shortTitle: "Air Quality Testing"
 summary: "Measure airborne spores to protect the air your family breathes."
 description: "Air sampling that measures airborne spore concentrations and compares indoor to outdoor levels to protect the air your family breathes."
 icon: "wind"
-order: 3
+order: 4
 featured: true
 benefits:
   - "Air sampling in multiple zones of the property"

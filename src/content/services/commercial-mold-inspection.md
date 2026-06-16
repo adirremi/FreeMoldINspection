@@ -4,7 +4,7 @@ shortTitle: "Commercial"
 summary: "Keep your business compliant, safe, and open for customers."
 description: "Mold inspections for offices, retail, restaurants, and multi-unit buildings — protecting occupants and helping you meet your obligations."
 icon: "shield"
-order: 6
+order: 7
 featured: false
 benefits:
   - "Offices, retail, restaurants, and multi-unit buildings"
