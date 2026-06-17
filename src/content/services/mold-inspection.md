@@ -13,7 +13,7 @@ benefits:
   - "Honest recommendations with no pressure to remediate"
 faqs:
   - question: "How long does a mold inspection take?"
-    answer: "Most residential mold inspections take one to two hours, depending on the size and condition of the property. Larger or more complex buildings may take longer, and we will always give you a realistic time estimate before we begin."
+    answer: "Most residential mold inspections take one to two hours, depending on the size and condition of the property. Larger or more complex buildings may take longer, and we will give you a realistic time estimate before we begin."
   - question: "Will I get a written report?"
     answer: "Yes. After every comprehensive inspection you receive a clear, photo-documented report that explains exactly what we found, where we found it, and what it means for your property."
   - question: "Do I need an inspection if I cannot see any mold?"
@@ -42,4 +42,4 @@ We use **thermal imaging** to reveal temperature differences that signal hidden 
 
 When the inspection is complete, you receive a documented report with photos so you understand exactly what was found and why it matters. If mold is present, we explain the likely cause and the moisture source feeding it. If your property is clean, you get the peace of mind that comes from a thorough, independent evaluation.
 
-Because we focus on inspection and testing rather than remediation, our findings stay objective. You will never feel pressured into expensive work you may not need.
+Because we focus on inspection and testing rather than remediation, our findings stay objective. You won't feel pressured into work you may not need.

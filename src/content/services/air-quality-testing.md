@@ -22,7 +22,7 @@ faqs:
 
 ## Protect the air you breathe
 
-You cannot always see mold, but you can breathe its spores. Our **indoor air quality testing** captures airborne samples and compares them against outdoor baseline readings to determine whether your indoor environment is healthy. It answers a question a visual inspection cannot: what is actually circulating in the air your family breathes every day?
+You cannot always see mold, but you can breathe its spores. Our **indoor air quality testing** captures airborne samples and compares them against outdoor baseline readings to determine whether your indoor air shows elevated mold spore levels. It answers a question a visual inspection cannot: what is actually circulating in the air your family breathes every day?
 
 Mold spores are microscopic and easily become airborne, traveling through rooms and HVAC systems. Elevated indoor spore levels can contribute to allergies, asthma flare-ups, sinus irritation, and a general feeling of being unwell that improves when you leave the property.
 

@@ -2,15 +2,15 @@
 title: "Swab Mold Test"
 shortTitle: "Swab Mold Test"
 summary: "Targeted swab sampling of a specific surface for precise lab identification."
-description: "A targeted swab mold test collects a sample from a specific surface for accredited lab analysis that confirms the mold type and severity."
+description: "A targeted swab mold test collects a sample from a specific surface for accredited lab analysis that helps identify the mold type present."
 icon: "swab"
 order: 3
 featured: false
 benefits:
   - "Sterile swab sampling from a specific surface or spot"
   - "Accredited laboratory analysis of the sample"
-  - "Confirms the mold type present on the tested area"
-  - "Fast, low-cost way to verify a suspicious spot"
+  - "Helps identify the mold type present on the tested area"
+  - "A focused way to verify a specific suspicious spot"
 faqs:
   - question: "What is a swab mold test?"
     answer: "A swab mold test uses a sterile swab to collect material directly from a specific surface — such as a stained wall, grout line, vent, or windowsill — which is then analyzed by an accredited laboratory to confirm the type of mold present."
@@ -22,7 +22,7 @@ faqs:
 
 ## Confirm a suspicious spot with a swab test
 
-Sometimes you do not need a full investigation — you just need to know whether that stain on the wall, the discoloration around a vent, or the dark patch in the bathroom is actually mold, and what kind. Our **swab mold test** is a fast, focused, and affordable way to get a definitive answer for a specific surface.
+Sometimes you do not need a full investigation — you just need to know whether that stain on the wall, the discoloration around a vent, or the dark patch in the bathroom is actually mold, and what kind. Our **swab mold test** is a focused, efficient way to get a clear answer about a specific surface.
 
 Using a **sterile swab**, our technician collects material directly from the area of concern. The sample is carefully labeled, documented, and sent to an accredited independent laboratory, where it is analyzed to identify the mold present on that surface.
 
@@ -35,7 +35,7 @@ The process is simple and minimally invasive:
 - The sample is sealed, labeled, and tracked for laboratory analysis
 - You receive clear results explaining what was found and what it means
 
-Because the test targets a single location, it is one of the most cost-effective ways to verify a concern — perfect for a landlord confirming a tenant's report, a homeowner checking a recurring spot, or a buyer who noticed something during a walkthrough.
+Because the test targets a single location, it is a practical, focused way to verify a concern — useful for a landlord checking a tenant's report, a homeowner reviewing a recurring spot, or a buyer who noticed something during a walkthrough.
 
 ## When a swab test is the right choice
 

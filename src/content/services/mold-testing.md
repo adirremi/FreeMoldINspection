@@ -22,9 +22,11 @@ faqs:
 
 ## Know exactly what you are dealing with
 
-A visual inspection tells you where mold is — **laboratory testing** tells you what it is. We collect samples from affected areas and submit them to an independent, accredited lab for analysis, so your results are objective and defensible.
+A visual inspection can identify signs of mold growth—but only laboratory testing can determine exactly what type of mold is present. Our certified inspectors collect samples from affected areas and submit them to an independent, accredited laboratory for precise analysis, ensuring your results are objective, accurate, and defensible.
 
-This matters because not all mold is the same. Some species are common nuisances, while others raise more serious health and structural concerns. Without testing, you are left guessing about both the severity of the problem and the right way to respond.
+This distinction is critical because not all mold species pose the same level of risk. While some molds are relatively common and less concerning, others may present significant health hazards or indicate underlying moisture issues that can compromise a property's structural integrity. Without professional testing, property owners are left to speculate about the severity of the contamination and the appropriate course of action.
+
+By combining expert sampling with certified laboratory analysis, we provide the reliable information you need to make informed decisions regarding remediation, insurance claims, and the health of your indoor environment.
 
 ## Our sampling methods
 

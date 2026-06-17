@@ -8,7 +8,7 @@ export const GENERAL_FAQS: readonly FAQ[] = [
   {
     question: "How much does a mold inspection cost?",
     answer:
-      "Pricing depends on the size of the property and whether laboratory testing is required. Call us at (888) 800-4980 for a straightforward quote with no hidden fees. We always explain exactly what is included before we begin.",
+      "Pricing depends on the size of the property and whether laboratory testing is required. Call us at (888) 800-4980 for a quote, and we'll explain what is included before we begin.",
   },
   {
     question: "How long does a mold inspection take?",

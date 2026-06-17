@@ -17,7 +17,7 @@ faqs:
   - question: "Do you provide documentation for landlords and tenants?"
     answer: "Yes. We provide clear, professional documentation that supports leasing discussions, insurance claims, and compliance needs, helping both property managers and tenants resolve concerns objectively."
   - question: "Can you verify a previous remediation?"
-    answer: "We do. Post-remediation clearance verification confirms whether a completed cleanup actually resolved the problem, giving you and your occupants documented peace of mind."
+    answer: "We do. Post-remediation clearance verification helps confirm whether a completed cleanup resolved the problem, giving you and your occupants documented peace of mind."
 ---
 
 ## Safeguard your business
@@ -40,6 +40,6 @@ Our commercial inspections are well suited to a wide range of spaces, including:
 
 Commercial situations often require more than an answer — they require a paper trail. We provide clear, professional documentation suitable for landlords, tenants, insurers, and compliance purposes. That documentation helps resolve disputes objectively and demonstrates that you took responsible action to protect occupants.
 
-We also offer **post-remediation clearance verification**, confirming that a completed cleanup actually resolved the problem. This protects you from reopening a space prematurely and gives everyone involved documented confidence.
+We also offer **post-remediation clearance verification**, which checks whether a completed cleanup resolved the problem. This helps you avoid reopening a space prematurely and gives everyone involved documented confidence.
 
 Throughout the process, we work around your operations to minimize disruption — scheduling before opening, after closing, or during slower periods whenever possible. The result is a thorough inspection that protects your people, your property, and your reputation, without bringing your business to a halt.
