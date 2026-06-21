@@ -1,0 +1,51 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import SectionHeading from "@components/SectionHeading.astro";
+import CTASection from "@components/CTASection.astro";
+import Icon from "@components/Icon.astro";
+import { CITIES } from "@data/locations";
+---
+
+<BaseLayout
+  title="Mold Inspection Service Areas in Florida"
+  description="Free Mold Inspection serves cities across Florida — Miami, Orlando, Tampa, Fort Lauderdale, Jacksonville, Naples, and more. Find local mold inspection and testing."
+>
+  <section class="bg-ink-900">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <p class="text-sm font-bold uppercase tracking-wider text-brand-400">Service Areas</p>
+      <h1 class="mt-2 max-w-3xl text-4xl font-extrabold text-white sm:text-5xl">
+        Mold Inspection & Testing Across Florida
+      </h1>
+      <p class="mt-5 max-w-2xl text-lg text-ink-200">
+        We provide certified mold inspection and testing statewide. Choose your
+        city for local service details.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+    <SectionHeading eyebrow="Find Your City" title="Cities We Serve" />
+    <ul class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        CITIES.map((city) => (
+          <li>
+            <a
+              href={`/locations/${city.slug}/`}
+              class="group flex items-center justify-between gap-3 rounded-xl border border-ink-200 bg-white p-4 shadow-sm transition hover:border-brand-300 hover:shadow-md"
+            >
+              <span class="flex items-center gap-3 font-semibold text-ink-900 group-hover:text-brand-700">
+                <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-accent-50 text-accent-600">
+                  <Icon name="map-pin" class="h-5 w-5" />
+                </span>
+                {city.name}, FL
+              </span>
+              <svg class="h-4 w-4 text-brand-600 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <CTASection title="Need mold inspection in your area?" />
+</BaseLayout>

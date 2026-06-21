@@ -1,0 +1,134 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import SectionHeading from "@components/SectionHeading.astro";
+import CTASection from "@components/CTASection.astro";
+import Button from "@components/Button.astro";
+import Icon from "@components/Icon.astro";
+import { CITIES, CITY_SERVICES, type City } from "@data/locations";
+import { SITE } from "@data/site";
+
+// One static page is generated per city in the CITIES list.
+export function getStaticPaths() {
+  return CITIES.map((city) => ({
+    params: { city: city.slug },
+    props: { city },
+  }));
+}
+
+interface Props {
+  city: City;
+}
+
+const { city } = Astro.props;
+
+// Suggest a few nearby cities for internal linking.
+const otherCities = CITIES.filter((c) => c.slug !== city.slug).slice(0, 6);
+---
+
+<BaseLayout
+  title={`Mold Inspection in ${city.name}, FL`}
+  description={`Certified mold inspection and testing in ${city.name}, FL. Free visual inspection, air and surface sampling, moisture mapping, thermal imaging, lab testing, and insurance documentation.`}
+>
+  <!-- Breadcrumb -->
+  <nav aria-label="Breadcrumb" class="border-b border-ink-200 bg-ink-50">
+    <ol class="mx-auto flex max-w-6xl flex-wrap items-center gap-2 px-4 py-3 text-sm text-ink-500 sm:px-6">
+      <li><a href="/" class="hover:text-brand-700">Home</a></li>
+      <li aria-hidden="true">/</li>
+      <li><a href="/locations/" class="hover:text-brand-700">Service Areas</a></li>
+      <li aria-hidden="true">/</li>
+      <li class="font-medium text-ink-800" aria-current="page">{city.name}</li>
+    </ol>
+  </nav>
+
+  <!-- Header -->
+  <section class="bg-ink-900">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <p class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-brand-400">
+        <Icon name="map-pin" class="h-4 w-4" />
+        {city.name}, Florida
+      </p>
+      <h1 class="mt-3 max-w-3xl text-4xl font-extrabold text-white sm:text-5xl">
+        Certified Mold Inspection & Testing in {city.name}, FL
+      </h1>
+      <p class="mt-5 max-w-2xl text-lg text-ink-200">
+        Local, certified mold inspection and testing for homes and businesses in
+        {city.name}. Fast scheduling, accredited lab analysis, and clear reporting.
+      </p>
+      <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+        <Button href={SITE.phoneHref} variant="primary" size="lg">
+          <Icon name="phone" class="h-5 w-5" />
+          Call {SITE.phone}
+        </Button>
+        <Button href={SITE.smsHref} size="lg" class="bg-accent-600 text-white hover:bg-accent-700">
+          <Icon name="chat" class="h-5 w-5" />
+          Text Us
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services in this city -->
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+    <SectionHeading
+      eyebrow="What We Offer"
+      title={`Mold Services in ${city.name}`}
+    >
+      <p class="mt-4 text-lg text-ink-700">
+        Everything you need to identify and document mold in {city.name}, from a
+        free visual inspection to accredited laboratory testing.
+      </p>
+    </SectionHeading>
+
+    <ul class="mx-auto mt-12 grid max-w-3xl gap-4 sm:grid-cols-2">
+      {
+        CITY_SERVICES.map((service) => (
+          <li class="flex items-center gap-3 rounded-xl border border-ink-200 bg-white p-4 shadow-sm">
+            <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-100 text-accent-700">
+              <Icon name="check" class="h-5 w-5" />
+            </span>
+            <span class="font-semibold text-ink-900">{service}</span>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="mx-auto mt-12 max-w-3xl rounded-2xl border border-ink-200 bg-ink-50 p-6 text-center">
+      <p class="text-lg text-ink-700">
+        Serving {city.name} and the surrounding Florida communities. Call or text
+        for same-day appointment availability.
+      </p>
+    </div>
+  </section>
+
+  <!-- Nearby areas (internal links) -->
+  <section class="bg-ink-50">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+      <h2 class="text-2xl font-bold text-ink-900">Other Florida Service Areas</h2>
+      <ul class="mt-6 flex flex-wrap gap-3">
+        {
+          otherCities.map((c) => (
+            <li>
+              <a
+                href={`/locations/${c.slug}/`}
+                class="inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white px-4 py-2 text-sm font-medium text-ink-800 transition hover:border-brand-300 hover:text-brand-700"
+              >
+                <Icon name="map-pin" class="h-4 w-4 text-brand-600" />
+                {c.name}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a
+            href="/locations/"
+            class="inline-flex items-center rounded-full bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700"
+          >
+            View all areas
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <CTASection title={`Book your mold inspection in ${city.name}`} />
+</BaseLayout>

@@ -11,8 +11,11 @@ import Icon from "@components/Icon.astro";
 import { type IconName } from "@lib/icons";
 import { GENERAL_FAQS } from "@lib/faqs";
 import { SITE } from "@data/site";
+import { CITIES } from "@data/locations";
 
 import heroImage from "@assets/images/mold-inside-wall.jpeg";
+import iicrcLogo from "@assets/images/iicrc-logo.png";
+import credentialsImage from "@assets/images/mold-assessor-remediator.jpeg";
 import galleryWall from "@assets/images/mold-wall.jpeg";
 import galleryBathroom from "@assets/images/mold-bathroom.jpeg";
 import galleryKitchen from "@assets/images/mold-kitchen.jpeg";
@@ -25,27 +28,49 @@ const services = (await getCollection("services")).sort(
 );
 const featured = services.filter((s) => s.data.featured);
 
-const steps: { icon: IconName; title: string; text: string }[] = [
+const steps: { title: string; text: string }[] = [
   {
-    icon: "phone",
-    title: "1. Call or Request Online",
-    text: "Reach out and tell us your concern. We schedule your inspection at a time that works for you.",
+    title: "Free Visual Inspection",
+    text: "We inspect the property for visible signs of mold, moisture intrusion, and water damage.",
   },
   {
-    icon: "search",
-    title: "2. On-Site Inspection",
-    text: "A certified inspector evaluates your property with thermal imaging and moisture meters.",
+    title: "Moisture Mapping & Thermal Imaging",
+    text: "Advanced tools are used to identify hidden moisture and potential mold growth behind walls and ceilings.",
   },
   {
-    icon: "flask",
-    title: "3. Lab Testing",
-    text: "If needed, we collect samples and send them to an accredited lab for accurate species results.",
+    title: "Air & Surface Sampling",
+    text: "Samples are collected when necessary and submitted to an independent accredited laboratory.",
   },
   {
-    icon: "shield",
-    title: "4. Clear Report",
-    text: "You receive a documented report with honest, pressure-free recommendations.",
+    title: "Laboratory Analysis",
+    text: "All samples are analyzed by a certified third-party laboratory.",
   },
+  {
+    title: "Detailed Report & Recommendations",
+    text: "You receive a comprehensive report with findings, lab results, and recommendations for next steps.",
+  },
+];
+
+const whyChooseUs = [
+  "Licensed Mold Assessor",
+  "IICRC Certified",
+  "Reports Within 24-48 Hours",
+  "Same Day Appointments",
+  "Insurance Claim Experience",
+  "Serving All Florida",
+];
+
+const insuranceItems = [
+  "Water Damage Documentation",
+  "Moisture Readings",
+  "Mold Testing",
+  "Independent Laboratory Reports",
+  "Insurance Support Documentation",
+];
+
+const licenses: { code: string; title: string }[] = [
+  { code: "MRSA3365", title: "Mold Assessor" },
+  { code: "MRSR3576", title: "Mold Remediator" },
 ];
 
 const reasons: { icon: IconName; title: string; text: string }[] = [
@@ -87,12 +112,31 @@ const gallery = [
   image="/og-image.jpg"
 >
   <Hero
-    eyebrow="Certified & Trusted in South Florida"
-    title="Certified Mold Inspection & Testing in Pembroke Park, FL"
+    eyebrow="Certified & Trusted Across Florida"
+    title="Free Mold Inspection & Certified Mold Testing Across Florida"
     subtitle="Helping protect your home, your business, and the air your family breathes. We help uncover hidden mold with thermal imaging, moisture mapping, and accredited lab testing."
     image={heroImage}
     imageAlt="Mold discovered inside a damaged interior wall"
   />
+
+  <!-- IICRC / credentials strip -->
+  <section class="border-b border-ink-200 bg-white">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-center gap-x-10 gap-y-4 px-4 py-6 sm:flex-row sm:px-6">
+      <Image
+        src={iicrcLogo}
+        alt="IICRC – Institute of Inspection Cleaning and Restoration Certification"
+        width={220}
+        height={84}
+        class="h-12 w-auto sm:h-14"
+        loading="eager"
+      />
+      <ul class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm font-semibold text-ink-700">
+        <li class="flex items-center gap-2"><Icon name="check" class="h-4 w-4 text-accent-600" /> IICRC Certified</li>
+        <li class="flex items-center gap-2"><Icon name="check" class="h-4 w-4 text-accent-600" /> Licensed FL Mold Assessor</li>
+        <li class="flex items-center gap-2"><Icon name="check" class="h-4 w-4 text-accent-600" /> Insurance Claims Welcome</li>
+      </ul>
+    </div>
+  </section>
 
   <!-- Trust bar -->
   <section class="border-b border-ink-200 bg-ink-50">
@@ -146,23 +190,83 @@ const gallery = [
     </div>
   </section>
 
-  <!-- Process -->
+  <!-- Why Choose Us -->
   <section class="bg-ink-50">
     <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-      <SectionHeading eyebrow="How It Works" title="A Simple, Transparent Process" />
-      <ol class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <SectionHeading eyebrow="Why Choose Us" title="Why Florida Homeowners Trust Us">
+        <p class="mt-4 text-lg text-ink-700">
+          Licensed, certified, and responsive — here's what you can count on
+          when you work with our team.
+        </p>
+      </SectionHeading>
+
+      <ul class="mx-auto mt-12 grid max-w-4xl gap-4 sm:grid-cols-2">
         {
-          steps.map((step) => (
-            <li class="rounded-2xl border border-ink-200 bg-white p-6 shadow-sm">
-              <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-600 text-white">
-                <Icon name={step.icon} class="h-6 w-6" />
+          whyChooseUs.map((item) => (
+            <li class="flex items-center gap-3 rounded-xl border border-ink-200 bg-white p-4 shadow-sm">
+              <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-100 text-accent-700">
+                <Icon name="check" class="h-5 w-5" />
               </span>
-              <h3 class="mt-4 text-lg font-bold text-ink-900">{step.title}</h3>
-              <p class="mt-2 text-ink-700">{step.text}</p>
+              <span class="font-semibold text-ink-900">{item}</span>
             </li>
           ))
         }
-      </ol>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Our Mold Inspection Process -->
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+    <SectionHeading eyebrow="How It Works" title="Our Mold Inspection Process" />
+    <ol class="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-2">
+      {
+        steps.map((step, index) => (
+          <li class="flex gap-4 rounded-2xl border border-ink-200 bg-white p-6 shadow-sm">
+            <span
+              class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-600 text-lg font-extrabold text-white shadow-sm"
+              aria-hidden="true"
+            >
+              {index + 1}
+            </span>
+            <div>
+              <h3 class="text-lg font-bold text-ink-900">{step.title}</h3>
+              <p class="mt-1.5 text-ink-700">{step.text}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <!-- Insurance Claims -->
+  <section class="bg-brand-900">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <div class="grid items-center gap-10 lg:grid-cols-2">
+        <div>
+          <p class="text-sm font-bold uppercase tracking-wider text-brand-300">
+            Insurance Support
+          </p>
+          <h2 class="mt-2 text-3xl font-extrabold text-white sm:text-4xl">
+            Mold Inspection for Insurance Claims
+          </h2>
+          <p class="mt-4 text-lg text-brand-100">
+            Filing a claim? We provide the independent documentation insurers ask
+            for, so you can support your case with clear, third-party evidence.
+          </p>
+        </div>
+        <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+          {
+            insuranceItems.map((item) => (
+              <li class="flex items-center gap-3 rounded-xl bg-white/10 px-4 py-3 ring-1 ring-white/15">
+                <span class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent-500 text-white">
+                  <Icon name="check" class="h-4 w-4" />
+                </span>
+                <span class="font-medium text-white">{item}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -193,6 +297,104 @@ const gallery = [
           </figure>
         ))
       }
+    </div>
+  </section>
+
+  <!-- Licensed & Certified -->
+  <section class="bg-ink-50">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <SectionHeading eyebrow="Credentials" title="Licensed & Certified">
+        <p class="mt-4 text-lg text-ink-700">
+          State-licensed and industry-certified for both mold assessment and
+          remediation — verifiable credentials you can rely on.
+        </p>
+      </SectionHeading>
+
+      <div class="mt-12 grid items-center gap-10 lg:grid-cols-2">
+        <ul class="space-y-5">
+          {
+            licenses.map((license) => (
+              <li class="flex items-center gap-5 rounded-2xl border border-ink-200 bg-white p-5 shadow-sm">
+                <span class="flex h-24 w-24 shrink-0 flex-col items-center justify-center rounded-full bg-gradient-to-br from-brand-600 to-brand-800 text-white shadow-lg ring-4 ring-brand-100">
+                  <span class="text-[0.65rem] font-semibold uppercase tracking-wide text-brand-200">
+                    License
+                  </span>
+                  <span class="text-base font-extrabold tracking-tight">
+                    {license.code}
+                  </span>
+                </span>
+                <div>
+                  <h3 class="text-xl font-bold text-ink-900">{license.title}</h3>
+                  <p class="text-ink-600">State of Florida license #{license.code}</p>
+                </div>
+              </li>
+            ))
+          }
+          <li class="flex items-center gap-5 rounded-2xl border border-ink-200 bg-white p-5 shadow-sm">
+            <span class="flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-white p-3 shadow-lg ring-4 ring-accent-100">
+              <Image
+                src={iicrcLogo}
+                alt="IICRC Certified"
+                width={120}
+                height={120}
+                class="h-full w-full object-contain"
+                loading="lazy"
+              />
+            </span>
+            <div>
+              <h3 class="text-xl font-bold text-ink-900">IICRC Certified</h3>
+              <p class="text-ink-600">Institute of Inspection Cleaning and Restoration Certification</p>
+            </div>
+          </li>
+        </ul>
+
+        <figure class="overflow-hidden rounded-2xl border border-ink-200 bg-white shadow-sm">
+          <Image
+            src={credentialsImage}
+            alt="A licensed mold assessor and a certified mold remediator in protective gear"
+            widths={[480, 720, 1024]}
+            sizes="(min-width: 1024px) 45vw, 100vw"
+            class="h-full w-full object-cover"
+            loading="lazy"
+          />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Areas -->
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+    <SectionHeading eyebrow="Service Areas" title="Mold Inspection Across Florida">
+      <p class="mt-4 text-lg text-ink-700">
+        We serve homeowners and businesses statewide. Find your city below for
+        local mold inspection and testing.
+      </p>
+    </SectionHeading>
+
+    <ul class="mx-auto mt-10 flex max-w-5xl flex-wrap justify-center gap-3">
+      {
+        CITIES.map((city) => (
+          <li>
+            <a
+              href={`/locations/${city.slug}/`}
+              class="inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white px-4 py-2 text-sm font-medium text-ink-800 shadow-sm transition hover:border-brand-300 hover:bg-brand-50 hover:text-brand-700"
+            >
+              <Icon name="map-pin" class="h-4 w-4 text-brand-600" />
+              {city.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="mt-8 text-center">
+      <a
+        href="/locations/"
+        class="inline-flex items-center gap-1 font-semibold text-brand-700 hover:text-brand-800"
+      >
+        View all service areas
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </div>
   </section>
 
