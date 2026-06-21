@@ -119,22 +119,43 @@ const gallery = [
     imageAlt="Mold discovered inside a damaged interior wall"
   />
 
-  <!-- IICRC / credentials strip -->
+  <!-- Licensed & Certified — circular credential badges (below hero) -->
   <section class="border-b border-ink-200 bg-white">
-    <div class="mx-auto flex max-w-6xl flex-col items-center justify-center gap-x-10 gap-y-4 px-4 py-6 sm:flex-row sm:px-6">
-      <Image
-        src={iicrcLogo}
-        alt="IICRC – Institute of Inspection Cleaning and Restoration Certification"
-        width={220}
-        height={84}
-        class="h-12 w-auto sm:h-14"
-        loading="eager"
-      />
-      <ul class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm font-semibold text-ink-700">
-        <li class="flex items-center gap-2"><Icon name="check" class="h-4 w-4 text-accent-600" /> IICRC Certified</li>
-        <li class="flex items-center gap-2"><Icon name="check" class="h-4 w-4 text-accent-600" /> Licensed FL Mold Assessor</li>
-        <li class="flex items-center gap-2"><Icon name="check" class="h-4 w-4 text-accent-600" /> Insurance Claims Welcome</li>
-      </ul>
+    <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">
+      <p class="text-center text-sm font-bold uppercase tracking-wider text-brand-600">
+        Licensed &amp; Certified
+      </p>
+      <div class="mt-8 flex flex-wrap items-start justify-center gap-8 sm:gap-12">
+        {
+          licenses.map((license) => (
+            <div class="flex w-32 flex-col items-center text-center">
+              <span class="flex h-28 w-28 flex-col items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-brand-800 text-white shadow-lg ring-4 ring-brand-100 transition hover:scale-105">
+                <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-brand-100">
+                  License
+                </span>
+                <span class="mt-0.5 text-lg font-extrabold tracking-tight">
+                  {license.code}
+                </span>
+              </span>
+              <span class="mt-3 text-sm font-bold text-ink-900">{license.title}</span>
+            </div>
+          ))
+        }
+
+        <div class="flex w-32 flex-col items-center text-center">
+          <span class="flex h-28 w-28 items-center justify-center rounded-full bg-white p-4 shadow-lg ring-4 ring-accent-100 transition hover:scale-105">
+            <Image
+              src={iicrcLogo}
+              alt="IICRC Certified – Institute of Inspection Cleaning and Restoration Certification"
+              width={120}
+              height={120}
+              class="h-full w-full object-contain"
+              loading="eager"
+            />
+          </span>
+          <span class="mt-3 text-sm font-bold text-ink-900">IICRC Certified</span>
+        </div>
+      </div>
     </div>
   </section>
 
