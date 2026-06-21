@@ -46,41 +46,47 @@ const {
   <div class="absolute inset-0 -z-10 bg-gradient-to-r from-ink-900/90 via-ink-900/70 to-brand-900/40"></div>
 
   <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28 lg:py-36">
-    <div class="max-w-2xl">
-      {
-        eyebrow && (
-          <p class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-brand-200 ring-1 ring-white/20">
-            <Icon name="shield" class="h-4 w-4" />
-            {eyebrow}
-          </p>
-        )
-      }
-      <h1 class="mt-5 text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
-        {title}
-      </h1>
-      {
-        subtitle && (
-          <p class="mt-5 text-lg leading-relaxed text-ink-200 sm:text-xl">
-            {subtitle}
-          </p>
-        )
-      }
-      <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-        <Button href={primaryHref} variant="primary" size="lg">
-          <Icon name="phone" class="h-5 w-5" />
-          {primaryLabel}
-        </Button>
-        <Button
-          href={SITE.smsHref}
-          size="lg"
-          class="bg-accent-600 text-white shadow-sm hover:bg-accent-700"
-        >
-          <Icon name="chat" class="h-5 w-5" />
-          Text Us
-        </Button>
-        <Button href={secondaryHref} variant="outline" size="lg">
-          {secondaryLabel}
-        </Button>
+    <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-12">
+      <div class="max-w-2xl">
+        {
+          eyebrow && (
+            <p class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-brand-200 ring-1 ring-white/20">
+              <Icon name="shield" class="h-4 w-4" />
+              {eyebrow}
+            </p>
+          )
+        }
+        <h1 class="mt-5 text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+          {title}
+        </h1>
+        {
+          subtitle && (
+            <p class="mt-5 text-lg leading-relaxed text-ink-200 sm:text-xl">
+              {subtitle}
+            </p>
+          )
+        }
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <Button href={primaryHref} variant="primary" size="lg">
+            <Icon name="phone" class="h-5 w-5" />
+            {primaryLabel}
+          </Button>
+          <Button
+            href={SITE.smsHref}
+            size="lg"
+            class="bg-accent-600 text-white shadow-sm hover:bg-accent-700"
+          >
+            <Icon name="chat" class="h-5 w-5" />
+            Text Us
+          </Button>
+          <Button href={secondaryHref} variant="outline" size="lg">
+            {secondaryLabel}
+          </Button>
+        </div>
+      </div>
+
+      <div class="flex justify-center lg:justify-end">
+        <slot name="aside" />
       </div>
     </div>
   </div>
