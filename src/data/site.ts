@@ -18,6 +18,14 @@ export interface SiteConfig {
   readonly phoneHref: string;
   readonly smsHref: string;
   readonly email: string;
+  /** Primary Google Business Profile category. */
+  readonly gmbCategory: string;
+  /**
+   * Link to the Google Business Profile. Replace with your real GBP share link
+   * (e.g. https://g.page/your-profile) when available. Until then this points to
+   * a valid Google Maps search for the business so the link never 404s.
+   */
+  readonly gmbUrl: string;
   /**
    * Web3Forms access key for the contact form (https://web3forms.com).
    * Create a free key with the address below and paste it here.
@@ -52,6 +60,9 @@ export const SITE: SiteConfig = {
   phoneHref: "tel:+18888004980",
   smsHref: "sms:+18888004980",
   email: "Freemoldinspection1@gmail.com",
+  gmbCategory: "Mold Inspection Service",
+  gmbUrl:
+    "https://www.google.com/maps/search/?api=1&query=Free+Mold+Inspection+Pembroke+Park+FL",
   web3formsKey: "YOUR_WEB3FORMS_ACCESS_KEY",
   address: {
     street: "4077 SW 40th Ave",

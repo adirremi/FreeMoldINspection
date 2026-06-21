@@ -1,11 +1,39 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import SectionHeading from "@components/SectionHeading.astro";
 import CTASection from "@components/CTASection.astro";
 import Button from "@components/Button.astro";
 import Icon from "@components/Icon.astro";
-import { CITIES, CITY_SERVICES, type City } from "@data/locations";
+import FAQ from "@components/FAQ.astro";
+import {
+  CITIES,
+  CITY_SERVICES,
+  REVIEWS,
+  type City,
+} from "@data/locations";
+import type { FAQ as FAQItem } from "@lib/faqs";
 import { SITE } from "@data/site";
+
+// Hero / cover image. To swap in a city-branded photo, name the file using the
+// local-SEO convention: brand_money-keyword_description.jpg
+// (e.g. free-mold-inspection_mold-inspection_wall-damage.jpg)
+import heroImage from "@assets/images/mold-inside-wall.jpeg";
+
+// Project / portfolio gallery images. Replace these with real job photos as you
+// collect them; keep the descriptive alt text below for accessibility + SEO.
+import gWall from "@assets/images/mold-wall.jpeg";
+import gCorners from "@assets/images/mold-corners.jpeg";
+import gBathroom from "@assets/images/mold-bathroom.jpeg";
+import gKitchen from "@assets/images/mold-kitchen.jpeg";
+import gCloseup from "@assets/images/mold-closeup.jpeg";
+import gFloor from "@assets/images/mold-floor.jpeg";
+import gEating from "@assets/images/mold-eating-wall.jpeg";
+import gKitchenFloor from "@assets/images/mold-kitchen-floor.jpeg";
+import gTester from "@assets/images/mold-tester.jpeg";
+import gDevice from "@assets/images/mold-test-device.jpeg";
+import gSwab from "@assets/images/mold-swab.jpeg";
+import gLaser from "@assets/images/mold-laser.jpeg";
 
 // One static page is generated per city in the CITIES list.
 export function getStaticPaths() {
@@ -21,13 +49,119 @@ interface Props {
 
 const { city } = Astro.props;
 
-// Suggest a few nearby cities for internal linking.
-const otherCities = CITIES.filter((c) => c.slug !== city.slug).slice(0, 6);
+const MONEY_KEYWORD = "Mold Inspection";
+
+// Human-friendly list joins ("A, B, and C").
+function joinList(items: readonly string[]): string {
+  if (items.length <= 1) return items[0] ?? "";
+  return `${items.slice(0, -1).join(", ")}, and ${items[items.length - 1]}`;
+}
+
+const nearbyList = joinList(city.nearby);
+const landmarkList = joinList(city.landmarks);
+
+// Nearby cities we also serve, for internal linking.
+const otherCities = CITIES.filter((c) => c.slug !== city.slug).slice(0, 8);
+
+const whyChooseUs = [
+  "Licensed Florida Mold Assessor & Mold Remediator",
+  "IICRC Certified",
+  "Reports typically within 24–48 hours",
+  "Same-day appointments often available",
+  "Experienced with insurance claim documentation",
+  `Local team serving ${city.name} and all of Florida`,
+];
+
+const process = [
+  {
+    title: "Free Visual Inspection",
+    text: "We assess the property for visible mold, moisture intrusion, and water damage.",
+  },
+  {
+    title: "Moisture Mapping & Thermal Imaging",
+    text: "We use moisture meters and thermal imaging to look for hidden moisture behind walls and ceilings.",
+  },
+  {
+    title: "Air & Surface Sampling",
+    text: "When appropriate, we collect samples and submit them to an independent, accredited laboratory.",
+  },
+  {
+    title: "Laboratory Analysis",
+    text: "Samples are analyzed by a certified third-party lab so results are objective.",
+  },
+  {
+    title: "Detailed Report & Recommendations",
+    text: "You receive a clear report with findings, lab results, and recommended next steps.",
+  },
+];
+
+const gallery = [
+  { src: gWall, alt: `Mold growth found behind a wall during an inspection in ${city.name}, FL` },
+  { src: gCorners, alt: `Mold spreading in a room corner inspected in ${city.name}, FL` },
+  { src: gBathroom, alt: `Bathroom mold assessment performed in ${city.name}, FL` },
+  { src: gKitchen, alt: `Kitchen mold inspection in a ${city.name}, FL home` },
+  { src: gCloseup, alt: `Close-up of mold colonies documented in ${city.name}, FL` },
+  { src: gFloor, alt: `Mold and moisture damage on flooring in ${city.name}, FL` },
+  { src: gEating, alt: `Mold deterioration on drywall examined in ${city.name}, FL` },
+  { src: gKitchenFloor, alt: `Moisture damage under kitchen flooring in ${city.name}, FL` },
+  { src: gTester, alt: `Certified inspector testing for mold in ${city.name}, FL` },
+  { src: gDevice, alt: `Air sampling device used during a ${city.name}, FL mold test` },
+  { src: gSwab, alt: `Surface swab sample collected during a ${city.name}, FL inspection` },
+  { src: gLaser, alt: `Moisture and thermal reading taken in a ${city.name}, FL property` },
+];
+
+const cityFaqs: readonly FAQItem[] = [
+  {
+    question: `Do you offer mold inspection in ${city.name}?`,
+    answer: `Yes. We provide mold inspection, testing, and remediation in ${city.name} and ${city.county} County, with service across ${city.region}. Call or text us to check current scheduling for your area.`,
+  },
+  {
+    question: `What does a mold inspection in ${city.name} include?`,
+    answer: `A typical inspection includes a visual assessment, moisture readings, and thermal imaging to look for hidden moisture. When appropriate, we collect air or surface samples and send them to an independent, accredited laboratory for analysis.`,
+  },
+  {
+    question: `How soon can you come out in ${city.name}?`,
+    answer: `We often have same-day and next-day appointments available in ${city.name}, depending on demand. Contact us and we will do our best to find a time that works for you.`,
+  },
+  {
+    question: `Do you provide documentation for insurance claims?`,
+    answer: `Yes. We can document our findings with photos, moisture readings, and independent laboratory results that you and your insurer can review. We provide objective documentation; coverage decisions are made by your insurance company.`,
+  },
+  {
+    question: `Do you also handle mold removal in ${city.name}?`,
+    answer: `Yes. We are licensed in Florida for both mold assessment and mold remediation, so we can inspect and, if you choose, remove mold and verify the results afterward.`,
+  },
+  {
+    question: `Which areas near ${city.name} do you serve?`,
+    answer: `Along with ${city.name}, we regularly serve nearby communities such as ${nearbyList}, and we work throughout ${city.region} and the rest of Florida.`,
+  },
+];
+
+const pageUrl = new URL(`/locations/${city.slug}/`, SITE.url).href;
+const mapQuery = encodeURIComponent(`Mold Inspection ${city.name}, FL`);
+
+// City-scoped Service schema. The LocalBusiness/Organization schema is emitted
+// site-wide by BaseLayout; this Service node references it and adds areaServed.
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: MONEY_KEYWORD,
+  name: `${MONEY_KEYWORD} in ${city.name}, FL`,
+  url: pageUrl,
+  areaServed: { "@type": "City", name: `${city.name}, FL` },
+  provider: {
+    "@type": "HomeAndConstructionBusiness",
+    "@id": `${SITE.url}/#localbusiness`,
+    name: SITE.name,
+    telephone: SITE.phoneHref.replace("tel:", ""),
+  },
+};
 ---
 
 <BaseLayout
-  title={`Mold Inspection in ${city.name}, FL`}
-  description={`Certified mold inspection and testing in ${city.name}, FL. Free visual inspection, air and surface sampling, moisture mapping, thermal imaging, lab testing, and insurance documentation.`}
+  title={`Mold Inspection in ${city.name}, FL | Free Mold Inspection`}
+  description={`Mold inspection, testing & remediation in ${city.name}, FL. Free visual inspection, moisture mapping, thermal imaging, and accredited lab testing. Call ${SITE.phone}.`}
+  image="/og-image.jpg"
 >
   <!-- Breadcrumb -->
   <nav aria-label="Breadcrumb" class="border-b border-ink-200 bg-ink-50">
@@ -40,26 +174,39 @@ const otherCities = CITIES.filter((c) => c.slug !== city.slug).slice(0, 6);
     </ol>
   </nav>
 
-  <!-- Header -->
-  <section class="bg-ink-900">
-    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-      <p class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-brand-400">
+  <!-- 1. Hero / cover -->
+  <section class="relative overflow-hidden bg-ink-900">
+    <Image
+      src={heroImage}
+      alt={`Mold inspection and testing in ${city.name}, FL`}
+      class="absolute inset-0 h-full w-full object-cover opacity-25"
+      widths={[640, 1024, 1600]}
+      sizes="100vw"
+      loading="eager"
+    />
+    <div class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+      <p class="inline-flex items-center gap-2 rounded-full bg-brand-600/90 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
         <Icon name="map-pin" class="h-4 w-4" />
-        {city.name}, Florida
+        {SITE.gmbCategory} · {city.name}, FL
       </p>
-      <h1 class="mt-3 max-w-3xl text-4xl font-extrabold text-white sm:text-5xl">
-        Certified Mold Inspection & Testing in {city.name}, FL
+      <h1 class="mt-4 max-w-3xl text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Mold Inspection in {city.name}, FL
       </h1>
       <p class="mt-5 max-w-2xl text-lg text-ink-200">
-        Local, certified mold inspection and testing for homes and businesses in
-        {city.name}. Fast scheduling, accredited lab analysis, and clear reporting.
+        Certified mold inspection, testing, and remediation for homes and
+        businesses in {city.name}. Free visual inspection, accredited lab
+        analysis, and clear, honest reporting.
       </p>
-      <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
         <Button href={SITE.phoneHref} variant="primary" size="lg">
           <Icon name="phone" class="h-5 w-5" />
           Call {SITE.phone}
         </Button>
-        <Button href={SITE.smsHref} size="lg" class="bg-accent-600 text-white hover:bg-accent-700">
+        <Button
+          href={SITE.smsHref}
+          size="lg"
+          class="bg-accent-600 text-white hover:bg-accent-700"
+        >
           <Icon name="chat" class="h-5 w-5" />
           Text Us
         </Button>
@@ -67,75 +214,360 @@ const otherCities = CITIES.filter((c) => c.slug !== city.slug).slice(0, 6);
     </div>
   </section>
 
-  <!-- Services in this city -->
-  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-    <SectionHeading
-      eyebrow="What We Offer"
-      title={`Mold Services in ${city.name}`}
-    >
-      <p class="mt-4 text-lg text-ink-700">
-        Everything you need to identify and document mold in {city.name}, from a
-        free visual inspection to accredited laboratory testing.
-      </p>
-    </SectionHeading>
-
-    <ul class="mx-auto mt-12 grid max-w-3xl gap-4 sm:grid-cols-2">
-      {
-        CITY_SERVICES.map((service) => (
-          <li class="rounded-xl border border-ink-200 bg-white shadow-sm transition hover:border-brand-300 hover:shadow-md">
-            <a
-              href={service.href}
-              class="group flex items-center gap-3 p-4"
-            >
-              <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-100 text-accent-700">
-                <Icon name="check" class="h-5 w-5" />
-              </span>
-              <span class="font-semibold text-ink-900 group-hover:text-brand-700">
-                {service.name}
-              </span>
-            </a>
-          </li>
-        ))
-      }
+  <!-- Trust signals -->
+  <div class="border-b border-ink-200 bg-white">
+    <ul class="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-6 gap-y-3 px-4 py-5 text-sm font-medium text-ink-700 sm:px-6">
+      <li class="inline-flex items-center gap-2"><Icon name="shield" class="h-4 w-4 text-accent-600" /> Licensed Assessor & Remediator</li>
+      <li class="inline-flex items-center gap-2"><Icon name="check" class="h-4 w-4 text-accent-600" /> IICRC Certified</li>
+      <li class="inline-flex items-center gap-2"><Icon name="clock" class="h-4 w-4 text-accent-600" /> Reports in 24–48 hrs (typical)</li>
+      <li class="inline-flex items-center gap-2"><Icon name="map-pin" class="h-4 w-4 text-accent-600" /> Serving all of Florida</li>
     </ul>
+  </div>
 
-    <div class="mx-auto mt-12 max-w-3xl rounded-2xl border border-ink-200 bg-ink-50 p-6 text-center">
-      <p class="text-lg text-ink-700">
-        Serving {city.name} and the surrounding Florida communities. Call or text
-        for same-day appointment availability.
+  <!-- 2. Intro + "Near You" -->
+  <section class="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
+    <h2 class="text-3xl font-bold text-ink-900">
+      Trusted Mold Inspection in {city.name}, Florida
+    </h2>
+    <div class="mt-6 space-y-4 text-lg leading-relaxed text-ink-700">
+      <p>
+        Free Mold Inspection provides professional <strong>mold inspection in
+        {city.name}</strong> and throughout {city.county} County. Our certified
+        inspectors help homeowners, renters, property managers, and business
+        owners understand whether mold is present, where moisture is coming
+        from, and what objective steps make sense next — without pressure.
       </p>
+      <p>
+        Looking for <strong>mold inspection near you</strong>? If you searched
+        for &ldquo;mold inspection near me&rdquo; or &ldquo;{MONEY_KEYWORD.toLowerCase()}
+        in {city.name},&rdquo; you are in the right place. We come to your
+        property in {city.name}, perform a thorough on-site assessment, and
+        explain what we find in plain language. When laboratory testing is
+        helpful, we use an independent, accredited lab so your results are
+        objective and defensible.
+      </p>
+    </div>
+    <div class="mt-8 text-center sm:text-left">
+      <Button href={SITE.phoneHref} variant="primary" size="lg">
+        <Icon name="phone" class="h-5 w-5" />
+        Call {SITE.phone}
+      </Button>
     </div>
   </section>
 
-  <!-- Nearby areas (internal links) -->
+  <!-- 3. Services in this city -->
   <section class="bg-ink-50">
-    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-      <h2 class="text-2xl font-bold text-ink-900">Other Florida Service Areas</h2>
-      <ul class="mt-6 flex flex-wrap gap-3">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <SectionHeading eyebrow="What We Offer" title={`Mold Services in ${city.name}`}>
+        <p class="mt-4 text-lg text-ink-700">
+          Everything you need to identify, document, and address mold in
+          {city.name} — from a free visual inspection to accredited laboratory
+          testing and licensed remediation.
+        </p>
+      </SectionHeading>
+
+      <ul class="mx-auto mt-12 grid max-w-3xl gap-4 sm:grid-cols-2">
         {
-          otherCities.map((c) => (
-            <li>
-              <a
-                href={`/locations/${c.slug}/`}
-                class="inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white px-4 py-2 text-sm font-medium text-ink-800 transition hover:border-brand-300 hover:text-brand-700"
-              >
-                <Icon name="map-pin" class="h-4 w-4 text-brand-600" />
-                {c.name}
+          CITY_SERVICES.map((service) => (
+            <li class="rounded-xl border border-ink-200 bg-white shadow-sm transition hover:border-brand-300 hover:shadow-md">
+              <a href={service.href} class="group flex items-center gap-3 p-4">
+                <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-100 text-accent-700">
+                  <Icon name="check" class="h-5 w-5" />
+                </span>
+                <span class="font-semibold text-ink-900 group-hover:text-brand-700">
+                  {service.name}
+                </span>
               </a>
             </li>
           ))
         }
-        <li>
-          <a
-            href="/locations/"
-            class="inline-flex items-center rounded-full bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700"
-          >
-            View all areas
-          </a>
-        </li>
       </ul>
+
+      <div class="mt-10 text-center">
+        <Button href={SITE.phoneHref} variant="primary" size="lg">
+          <Icon name="phone" class="h-5 w-5" />
+          Call {SITE.phone}
+        </Button>
+      </div>
     </div>
   </section>
 
-  <CTASection title={`Book your mold inspection in ${city.name}`} />
+  <!-- 4. Why Choose Us -->
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+    <SectionHeading eyebrow="Why Choose Us" title={`Why ${city.name} Trusts Free Mold Inspection`} />
+    <ul class="mx-auto mt-10 grid max-w-3xl gap-4 sm:grid-cols-2">
+      {
+        whyChooseUs.map((item) => (
+          <li class="flex items-start gap-3 rounded-xl border border-ink-200 bg-white p-4">
+            <span class="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent-100 text-accent-700">
+              <Icon name="check" class="h-4 w-4" />
+            </span>
+            <span class="font-medium text-ink-800">{item}</span>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="mt-10 text-center">
+      <Button href={SITE.phoneHref} variant="primary" size="lg">
+        <Icon name="phone" class="h-5 w-5" />
+        Call {SITE.phone}
+      </Button>
+    </div>
+  </section>
+
+  <!-- 5. Our Process -->
+  <section class="bg-ink-50">
+    <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20">
+      <SectionHeading eyebrow="How It Works" title={`Our Mold Inspection Process in ${city.name}`} />
+      <ol class="mt-10 space-y-5">
+        {
+          process.map((step, i) => (
+            <li class="flex gap-4 rounded-2xl border border-ink-200 bg-white p-5">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-600 text-lg font-bold text-white">
+                {i + 1}
+              </span>
+              <div>
+                <h3 class="text-lg font-bold text-ink-900">{step.title}</h3>
+                <p class="mt-1 text-ink-700">{step.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="mt-10 text-center">
+        <Button href={SITE.phoneHref} variant="primary" size="lg">
+          <Icon name="phone" class="h-5 w-5" />
+          Call {SITE.phone}
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. City-specific local information -->
+  <section class="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
+    <h2 class="text-3xl font-bold text-ink-900">About Mold in {city.name}</h2>
+    <div class="mt-6 space-y-4 text-lg leading-relaxed text-ink-700">
+      <p>
+        {city.name} sits in {city.county} County, part of {city.region}.
+        {" "}{city.note}
+      </p>
+      <p>
+        Our certified inspectors serve the entire area, including nearby
+        communities such as {nearbyList}. We come to you, assess the property in
+        person, and document what we find so you have a clear record for your
+        own decisions or for an insurance claim.
+      </p>
+      <p>
+        {city.name} is known for {landmarkList}, and its homes and businesses
+        span a wide range of ages and construction styles. That variety means
+        moisture problems can show up differently from one property to the next
+        — which is why an on-site, {city.name}-specific inspection is far more
+        reliable than a generic checklist. Whether you manage a waterfront
+        condo, a single-family home, or a commercial space, our goal is the
+        same: give you clear, objective information about moisture and mold.
+      </p>
+      <p>
+        Florida's warm, humid climate and frequent rain mean mold can develop
+        quietly behind walls, under flooring, and around HVAC systems. Catching
+        moisture early helps protect both your property and your indoor
+        environment. If you have noticed a musty smell, visible staining, or
+        recent water damage in {city.name}, an inspection is a sensible first
+        step.
+      </p>
+    </div>
+    <div class="mt-8 text-center sm:text-left">
+      <Button href={SITE.phoneHref} variant="primary" size="lg">
+        <Icon name="phone" class="h-5 w-5" />
+        Call {SITE.phone}
+      </Button>
+    </div>
+  </section>
+
+  <!-- 7. Project gallery -->
+  <section class="bg-ink-900">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <div class="text-center">
+        <p class="text-sm font-bold uppercase tracking-wider text-brand-400">Our Work</p>
+        <h2 class="mt-2 text-3xl font-bold text-white">
+          Mold Inspections & Projects Near {city.name}
+        </h2>
+        <p class="mx-auto mt-3 max-w-2xl text-ink-300">
+          A look at the kinds of mold and moisture conditions our certified
+          inspectors document in the field.
+        </p>
+      </div>
+
+      <div class="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+        {
+          gallery.map((item) => (
+            <div class="overflow-hidden rounded-xl bg-ink-800">
+              <Image
+                src={item.src}
+                alt={item.alt}
+                class="h-40 w-full object-cover transition duration-300 hover:scale-105 sm:h-44"
+                widths={[300, 500]}
+                sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+                loading="lazy"
+              />
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mt-10 text-center">
+        <Button href={SITE.phoneHref} variant="primary" size="lg">
+          <Icon name="phone" class="h-5 w-5" />
+          Call {SITE.phone}
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  {/* 8. Reviews / testimonials — only renders when real reviews exist in REVIEWS */}
+  {
+    REVIEWS.length > 0 && (
+      <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+        <SectionHeading eyebrow="Reviews" title={`What ${city.name} Customers Say`} />
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+          {REVIEWS.slice(0, 4).map((review) => (
+            <figure class="flex h-full flex-col rounded-2xl border border-ink-200 bg-white p-6 shadow-sm">
+              <div class="flex gap-1 text-accent-500" aria-hidden="true">
+                {[0, 1, 2, 3, 4].map(() => (
+                  <Icon name="star" class="h-5 w-5" />
+                ))}
+              </div>
+              <blockquote class="mt-4 grow text-ink-700">&ldquo;{review.quote}&rdquo;</blockquote>
+              <figcaption class="mt-4 text-sm font-semibold text-ink-900">
+                {review.name}
+                <span class="font-normal text-ink-500"> · {review.location}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+        <div class="mt-10 text-center">
+          <Button href={SITE.phoneHref} variant="primary" size="lg">
+            <Icon name="phone" class="h-5 w-5" />
+            Call {SITE.phone}
+          </Button>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- 9. Map, hours & Google Business Profile -->
+  <section class="bg-ink-50">
+    <div class="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-2">
+      <div>
+        <SectionHeading eyebrow="Local & Available" title={`Serving ${city.name} & Nearby Areas`} />
+        <dl class="mt-8 space-y-5 text-ink-700">
+          <div class="flex items-start gap-3">
+            <span class="mt-0.5 text-brand-600"><Icon name="clock" class="h-5 w-5" /></span>
+            <div>
+              <dt class="font-bold text-ink-900">Hours</dt>
+              <dd>
+                <ul class="mt-1 space-y-1">
+                  {SITE.hours.map((line) => <li>{line}</li>)}
+                </ul>
+              </dd>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="mt-0.5 text-brand-600"><Icon name="phone" class="h-5 w-5" /></span>
+            <div>
+              <dt class="font-bold text-ink-900">Call or Text</dt>
+              <dd><a href={SITE.phoneHref} class="text-brand-700 hover:underline">{SITE.phone}</a></dd>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="mt-0.5 text-brand-600"><Icon name="map-pin" class="h-5 w-5" /></span>
+            <div>
+              <dt class="font-bold text-ink-900">Google Business Profile</dt>
+              <dd>
+                <a
+                  href={SITE.gmbUrl}
+                  class="text-brand-700 hover:underline"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Find Free Mold Inspection on Google
+                </a>
+              </dd>
+            </div>
+          </div>
+        </dl>
+        <div class="mt-8">
+          <Button href={SITE.phoneHref} variant="primary" size="lg">
+            <Icon name="phone" class="h-5 w-5" />
+            Call {SITE.phone}
+          </Button>
+        </div>
+      </div>
+
+      <div class="overflow-hidden rounded-2xl border border-ink-200 shadow-sm">
+        <iframe
+          title={`Map of our ${city.name}, FL mold inspection service area`}
+          src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
+          class="h-80 w-full lg:h-full"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Internal links -->
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+    <h2 class="text-2xl font-bold text-ink-900">Explore Our Mold Services</h2>
+    <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <li><a href="/services/mold-inspection/" class="font-semibold text-brand-700 hover:underline">Mold Inspection</a></li>
+      <li><a href="/services/mold-testing/" class="font-semibold text-brand-700 hover:underline">Mold Testing</a></li>
+      <li><a href="/services/swab-mold-test/" class="font-semibold text-brand-700 hover:underline">Swab Mold Test</a></li>
+      <li><a href="/services/air-quality-testing/" class="font-semibold text-brand-700 hover:underline">Air Quality Testing</a></li>
+      <li><a href="/services/water-damage-assessment/" class="font-semibold text-brand-700 hover:underline">Water Damage Assessment</a></li>
+      <li><a href="/services/residential-mold-inspection/" class="font-semibold text-brand-700 hover:underline">Residential Mold Inspection</a></li>
+      <li><a href="/services/commercial-mold-inspection/" class="font-semibold text-brand-700 hover:underline">Commercial Mold Inspection</a></li>
+      <li><a href="/about/" class="font-semibold text-brand-700 hover:underline">About Free Mold Inspection</a></li>
+      <li><a href="/contact/" class="font-semibold text-brand-700 hover:underline">Contact / Book an Inspection</a></li>
+    </ul>
+
+    <h2 class="mt-12 text-2xl font-bold text-ink-900">Other Florida Service Areas</h2>
+    <ul class="mt-6 flex flex-wrap gap-3">
+      {
+        otherCities.map((c) => (
+          <li>
+            <a
+              href={`/locations/${c.slug}/`}
+              class="inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white px-4 py-2 text-sm font-medium text-ink-800 transition hover:border-brand-300 hover:text-brand-700"
+            >
+              <Icon name="map-pin" class="h-4 w-4 text-brand-600" />
+              {c.name}
+            </a>
+          </li>
+        ))
+      }
+      <li>
+        <a
+          href="/locations/"
+          class="inline-flex items-center rounded-full bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700"
+        >
+          View all areas
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 11. FAQ (6 Q&As + FAQPage JSON-LD via component) -->
+  <FAQ faqs={cityFaqs} title={`Mold Inspection FAQs — ${city.name}, FL`} />
+
+  <CTASection
+    title={`Book your mold inspection in ${city.name}`}
+    text={`Certified mold inspection, testing, and remediation in ${city.name}, FL. Call or text for same-day availability.`}
+  />
+
+  <!-- City-scoped Service JSON-LD -->
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(serviceSchema)}
+    is:inline
+  />
 </BaseLayout>
