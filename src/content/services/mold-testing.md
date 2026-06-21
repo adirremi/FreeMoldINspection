@@ -5,7 +5,7 @@ summary: "Accredited lab analysis that identifies mold species and spore counts.
 description: "Surface, swab, and tape-lift sampling with accredited lab analysis that identifies the exact mold species and concentration in your property."
 icon: "flask"
 order: 2
-featured: true
+featured: false
 benefits:
   - "Surface, swab, and tape-lift sampling"
   - "Analysis by an accredited independent laboratory"

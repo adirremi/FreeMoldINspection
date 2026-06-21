@@ -17,11 +17,11 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="bg-ink-900 text-ink-200">
-  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:items-stretch">
     <!-- Brand + contact -->
-    <div>
+    <div class="flex flex-col lg:min-h-full">
       <div class="flex items-center gap-3">
-        <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white p-1.5">
+        <span class="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white p-1.5">
           <Image
             src={logoIcon}
             alt={`${SITE.name} shield logo`}
@@ -31,15 +31,16 @@ const year = new Date().getFullYear();
             loading="lazy"
           />
         </span>
-        <p class="text-lg font-extrabold text-white">
-          Free Mold<span class="text-brand-400"> Inspection</span>
+        <p class="text-lg font-extrabold text-brand-400">
+          Free Mold Inspection
         </p>
       </div>
-      <!-- CTA block -->
-      <div class="mt-5 rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
+
+      <!-- CTA block — stretches to column bottom; email stays fully inside -->
+      <div class="mt-5 flex flex-1 flex-col rounded-2xl bg-white/5 p-5 pb-6 ring-1 ring-white/10">
         <p class="text-lg font-extrabold text-white">Think You May Have Mold?</p>
-        <p class="mt-1 text-brand-300">Call Today For Your Free Inspection</p>
-        <p class="text-sm text-accent-300">Schedule Same-Day Service</p>
+        <p class="mt-1 font-bold text-red-500">Call Today For Your Free Inspection</p>
+        <p class="font-bold text-red-500">Schedule Same-Day Service</p>
         <ul class="mt-4 space-y-3 text-sm">
           <li>
             <a
@@ -51,9 +52,12 @@ const year = new Date().getFullYear();
             </a>
           </li>
           <li>
-            <a href={`mailto:${SITE.email}`} class="flex items-center gap-2 hover:text-brand-300">
-              <Icon name="mail" class="h-4 w-4 shrink-0 text-brand-400" />
-              {SITE.email}
+            <a
+              href={`mailto:${SITE.email}`}
+              class="flex min-w-0 items-start gap-2 break-all hover:text-brand-300"
+            >
+              <Icon name="mail" class="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
+              <span class="min-w-0 break-all leading-snug">{SITE.email}</span>
             </a>
           </li>
           <li class="flex items-start gap-2">

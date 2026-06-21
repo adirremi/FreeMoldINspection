@@ -1,11 +1,11 @@
 ---
 title: "Swab Mold Test"
-shortTitle: "Swab Mold Test"
+shortTitle: "Swab Mold Testing"
 summary: "Targeted swab sampling of a specific surface for precise lab identification."
 description: "A targeted swab mold test collects a sample from a specific surface for accredited lab analysis that helps identify the mold type present."
 icon: "swab"
 order: 3
-featured: false
+featured: true
 benefits:
   - "Sterile swab sampling from a specific surface or spot"
   - "Accredited laboratory analysis of the sample"

@@ -76,9 +76,9 @@ export const SITE: SiteConfig = {
     longitude: -80.1773,
   },
   hours: [
-    "Monday – Friday: 8:00 AM – 6:00 PM",
-    "Saturday: 9:00 AM – 2:00 PM",
-    "Sunday: By appointment",
+    "Sunday – Thursday: 8:00 AM – 8:00 PM",
+    "Friday: 8:00 AM – 3:00 PM",
+    "Saturday: Closed",
   ],
   areasServed: [
     "Pembroke Park",
