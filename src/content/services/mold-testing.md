@@ -15,7 +15,7 @@ faqs:
   - question: "How long do lab results take?"
     answer: "Standard laboratory results are typically returned within a few business days after sampling. If you need answers faster, ask us about expedited lab processing when we schedule your visit."
   - question: "Why does the mold species matter?"
-    answer: "Different mold species carry different health and structural implications. Knowing exactly what is present helps you and any remediation contractor respond appropriately instead of guessing."
+    answer: "Different mold species carry different health and structural implications. Knowing exactly what is present helps guide the right remediation approach instead of guessing."
   - question: "Is testing always necessary?"
     answer: "Not always. A visual inspection is sometimes enough to confirm a problem. Testing is most valuable when mold is hidden, when you need documentation, or when you want to verify that a previous remediation worked."
 ---
@@ -40,7 +40,7 @@ Each sample is carefully labeled, documented, and chain-of-custody tracked befor
 
 ## Results you can use
 
-The laboratory identifies the specific mold species and the concentration present, and we translate those findings into plain language. You will understand what was detected, how significant it is, and what objective baseline a remediation contractor should work from.
+The laboratory identifies the specific mold species and the concentration present, and we translate those findings into plain language. You will understand what was detected, how significant it is, and the objective baseline any remediation work should be measured against.
 
 Lab testing is especially valuable in three situations: when mold is suspected but hidden, when you need formal documentation for a real-estate transaction or insurance claim, and when you want **post-remediation verification** that a previous cleanup actually solved the problem.
 

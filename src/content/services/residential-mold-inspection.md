@@ -38,7 +38,7 @@ Homeowners call us for many reasons, and all of them are valid:
 
 ## Built around your family
 
-We treat your home the way we would treat our own. Our inspectors are discreet, respectful, and focused on giving you straight answers — never a sales pitch. Because we specialize in inspection and testing rather than remediation, our recommendations stay objective and health-first.
+We treat your home the way we would treat our own. Our inspectors are discreet, respectful, and focused on giving you straight answers — never a sales pitch. Our recommendations are honest and health-first, and because we are licensed for both mold assessment and remediation, we can also take care of mold removal from start to finish if you need it.
 
 For buyers and sellers, a **pre-purchase or pre-sale inspection** is one of the smartest investments you can make. Buyers avoid inheriting hidden, costly problems, and sellers can address concerns proactively and move forward with confidence.
 

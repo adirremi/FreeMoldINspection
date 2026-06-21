@@ -86,11 +86,8 @@ export const SITE: SiteConfig = {
     { label: "About", href: "/about/" },
     { label: "Contact", href: "/contact/" },
   ],
-  social: [
-    { label: "Facebook", href: "https://www.facebook.com/" },
-    { label: "Instagram", href: "https://www.instagram.com/" },
-    { label: "Google", href: "https://www.google.com/maps" },
-  ],
+  // Add real, verified profile URLs here when available (used for SEO sameAs).
+  social: [],
 } as const;
 
 /** Convenience helper: a single formatted address line. */

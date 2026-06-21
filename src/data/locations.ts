@@ -42,13 +42,19 @@ export const CITIES: readonly City[] = CITY_NAMES.map((name) => ({
   slug: citySlug(name),
 }));
 
-/** Services listed on every city page. */
-export const CITY_SERVICES = [
-  "Free Mold Inspection",
-  "Air Sampling",
-  "Surface Sampling",
-  "Moisture Mapping",
-  "Thermal Imaging",
-  "Lab Testing",
-  "Insurance Documentation",
-] as const;
+export interface CityService {
+  readonly name: string;
+  /** Optional link to the related service page (internal linking). */
+  readonly href?: string;
+}
+
+/** Services listed on every city page, linked to their service pages. */
+export const CITY_SERVICES: readonly CityService[] = [
+  { name: "Free Mold Inspection", href: "/services/mold-inspection/" },
+  { name: "Air Sampling", href: "/services/air-quality-testing/" },
+  { name: "Surface Sampling", href: "/services/swab-mold-test/" },
+  { name: "Moisture Mapping", href: "/services/water-damage-assessment/" },
+  { name: "Thermal Imaging", href: "/services/mold-inspection/" },
+  { name: "Lab Testing", href: "/services/mold-testing/" },
+  { name: "Insurance Documentation", href: "/contact/" },
+];

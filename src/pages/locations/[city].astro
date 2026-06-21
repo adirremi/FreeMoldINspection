@@ -82,11 +82,18 @@ const otherCities = CITIES.filter((c) => c.slug !== city.slug).slice(0, 6);
     <ul class="mx-auto mt-12 grid max-w-3xl gap-4 sm:grid-cols-2">
       {
         CITY_SERVICES.map((service) => (
-          <li class="flex items-center gap-3 rounded-xl border border-ink-200 bg-white p-4 shadow-sm">
-            <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-100 text-accent-700">
-              <Icon name="check" class="h-5 w-5" />
-            </span>
-            <span class="font-semibold text-ink-900">{service}</span>
+          <li class="rounded-xl border border-ink-200 bg-white shadow-sm transition hover:border-brand-300 hover:shadow-md">
+            <a
+              href={service.href}
+              class="group flex items-center gap-3 p-4"
+            >
+              <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-100 text-accent-700">
+                <Icon name="check" class="h-5 w-5" />
+              </span>
+              <span class="font-semibold text-ink-900 group-hover:text-brand-700">
+                {service.name}
+              </span>
+            </a>
           </li>
         ))
       }

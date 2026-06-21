@@ -28,6 +28,6 @@ export const GENERAL_FAQS: readonly FAQ[] = [
   {
     question: "Do you also remove the mold you find?",
     answer:
-      "We focus on independent inspection and testing so our findings stay objective and pressure-free. After your report, we can explain your options and what a qualified remediation contractor should address to fix the problem at its source.",
+      "Yes. We are a licensed Florida Mold Assessor and Mold Remediator, so we can both inspect and remove mold. After your inspection we explain your options clearly, and if you'd like, our team can handle the remediation and verify the results afterward.",
   },
 ];

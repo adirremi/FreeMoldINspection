@@ -65,7 +65,7 @@ const related = (await getCollection("services"))
       </article>
 
       <!-- Benefits sidebar -->
-      <aside class="lg:sticky lg:top-24 lg:self-start">
+      <aside class="space-y-6 lg:sticky lg:top-24 lg:self-start">
         <div class="rounded-2xl border border-ink-200 bg-ink-50 p-6">
           <h2 class="text-lg font-bold text-ink-900">What's included</h2>
           <ul class="mt-4 space-y-3">
@@ -80,6 +80,17 @@ const related = (await getCollection("services"))
               ))
             }
           </ul>
+        </div>
+
+        <div class="rounded-2xl border border-brand-200 bg-brand-50 p-6">
+          <h2 class="text-lg font-bold text-ink-900">Available across Florida</h2>
+          <p class="mt-2 text-ink-700">
+            We offer this service statewide. Find your city on our
+            <a href="/locations/" class="font-semibold text-brand-700 hover:underline">
+              service areas
+            </a>
+            page, or <a href="/contact/" class="font-semibold text-brand-700 hover:underline">contact us</a> to book.
+          </p>
         </div>
       </aside>
     </div>
