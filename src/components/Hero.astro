@@ -45,28 +45,32 @@ const {
   />
   <div class="absolute inset-0 -z-10 bg-gradient-to-r from-ink-900/90 via-ink-900/70 to-brand-900/40"></div>
 
-  <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28 lg:py-36">
-    <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-12">
-      <div class="max-w-2xl">
+  <div class="mx-auto max-w-6xl px-4 pb-16 pt-10 sm:px-6 sm:pb-20 sm:pt-12 lg:pb-24 lg:pt-14">
+    <div class="grid items-stretch gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-12">
+      <div class="flex min-h-[22rem] max-w-2xl flex-col sm:min-h-[26rem] lg:min-h-[28rem]">
         {
           eyebrow && (
-            <p class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-brand-200 ring-1 ring-white/20">
+            <p class="inline-flex w-fit items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-brand-200 ring-1 ring-white/20">
               <Icon name="shield" class="h-4 w-4" />
               {eyebrow}
             </p>
           )
         }
-        <h1 class="mt-5 text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
-          {title}
-        </h1>
-        {
-          subtitle && (
-            <p class="mt-5 text-lg leading-relaxed text-ink-200 sm:text-xl">
-              {subtitle}
-            </p>
-          )
-        }
-        <div class="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+
+        <div class="mt-6 sm:mt-8">
+          <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+            {title}
+          </h1>
+          {
+            subtitle && (
+              <p class="mt-5 text-lg leading-relaxed text-ink-200 sm:text-xl">
+                {subtitle}
+              </p>
+            )
+          }
+        </div>
+
+        <div class="mt-auto flex flex-col items-start gap-3 pt-8 sm:flex-row sm:flex-wrap sm:items-center sm:pt-10 lg:pt-12">
           <Button href={primaryHref} variant="primary" size="lg">
             <Icon name="phone" class="h-5 w-5" />
             {primaryLabel}
@@ -85,7 +89,7 @@ const {
         </div>
       </div>
 
-      <div class="flex shrink-0 justify-center lg:justify-end">
+      <div class="flex shrink-0 items-center justify-center lg:justify-end">
         <slot name="aside" />
       </div>
     </div>
