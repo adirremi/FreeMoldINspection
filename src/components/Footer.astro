@@ -14,57 +14,62 @@ const services = (await getCollection("services")).sort(
   (a, b) => a.data.order - b.data.order
 );
 const year = new Date().getFullYear();
+/** Allows the footer email to wrap cleanly after @ instead of mid-domain. */
+const footerEmail = SITE.email.replace("@", "@\u200b");
 ---
 
 <footer class="bg-ink-900 text-ink-200">
-  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:items-stretch">
-    <!-- Brand + contact -->
-    <div class="flex flex-col lg:min-h-full">
-      <div class="flex items-center gap-3">
-        <span class="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white p-1.5">
-          <Image
-            src={logoIcon}
-            alt={`${SITE.name} shield logo`}
-            width={80}
-            height={80}
-            class="h-full w-full object-contain"
-            loading="lazy"
-          />
-        </span>
-        <p class="text-lg font-extrabold text-brand-400">
-          Free Mold Inspection
-        </p>
-      </div>
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-[minmax(18rem,1.2fr)_1fr_1fr_1fr] lg:items-stretch">
+    <!-- Brand + contact — single box wraps all content -->
+    <div class="min-w-0 lg:col-span-1">
+      <div class="w-full min-w-0 overflow-hidden rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
+        <div class="flex items-center gap-3">
+          <span class="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white p-1.5">
+            <Image
+              src={logoIcon}
+              alt={`${SITE.name} shield logo`}
+              width={80}
+              height={80}
+              class="h-full w-full object-contain"
+              loading="lazy"
+            />
+          </span>
+          <p class="text-lg font-extrabold text-brand-400">
+            Free Mold Inspection
+          </p>
+        </div>
 
-      <!-- CTA block — stretches to column bottom; email stays fully inside -->
-      <div class="mt-5 flex flex-1 flex-col rounded-2xl bg-white/5 p-5 pb-6 ring-1 ring-white/10">
-        <p class="text-lg font-extrabold text-white">Think You May Have Mold?</p>
-        <p class="mt-1 font-bold text-red-500">Call Today For Your Free Inspection</p>
-        <p class="font-bold text-red-500">Schedule Same-Day Service</p>
-        <ul class="mt-4 space-y-3 text-sm">
-          <li>
-            <a
-              href={SITE.phoneHref}
-              class="flex items-center gap-2 font-semibold text-white hover:text-brand-300"
-            >
-              <Icon name="phone" class="h-4 w-4 shrink-0 text-brand-400" />
-              {SITE.phone}
-            </a>
-          </li>
-          <li>
-            <a
-              href={`mailto:${SITE.email}`}
-              class="flex items-center gap-2 hover:text-brand-300"
-            >
-              <Icon name="mail" class="h-4 w-4 shrink-0 text-brand-400" />
-              <span class="text-xs whitespace-nowrap sm:text-sm">{SITE.email}</span>
-            </a>
-          </li>
-          <li class="flex items-start gap-2">
-            <Icon name="map-pin" class="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
-            <span>{formattedAddress()}</span>
-          </li>
-        </ul>
+        <div class="mt-5 border-t border-white/10 pt-5">
+          <p class="text-lg font-extrabold text-white">Think You May Have Mold?</p>
+          <p class="mt-1 font-bold text-red-500">Call Today For Your Free Inspection</p>
+          <p class="font-bold text-red-500">Schedule Same-Day Service</p>
+          <ul class="mt-4 space-y-3 text-sm">
+            <li>
+              <a
+                href={SITE.phoneHref}
+                class="flex items-center gap-2 font-semibold text-white hover:text-brand-300"
+              >
+                <Icon name="phone" class="h-4 w-4 shrink-0 text-brand-400" />
+                {SITE.phone}
+              </a>
+            </li>
+            <li class="min-w-0">
+              <a
+                href={`mailto:${SITE.email}`}
+                class="flex min-w-0 items-start gap-2 hover:text-brand-300"
+              >
+                <Icon name="mail" class="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
+                <span class="min-w-0 max-w-full text-[0.8125rem] leading-snug break-words">
+                  {footerEmail}
+                </span>
+              </a>
+            </li>
+            <li class="flex items-start gap-2">
+              <Icon name="map-pin" class="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
+              <span class="leading-snug">{formattedAddress()}</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
