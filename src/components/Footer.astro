@@ -54,10 +54,10 @@ const year = new Date().getFullYear();
           <li>
             <a
               href={`mailto:${SITE.email}`}
-              class="flex min-w-0 items-start gap-2 break-all hover:text-brand-300"
+              class="flex items-center gap-2 hover:text-brand-300"
             >
-              <Icon name="mail" class="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
-              <span class="min-w-0 break-all leading-snug">{SITE.email}</span>
+              <Icon name="mail" class="h-4 w-4 shrink-0 text-brand-400" />
+              <span class="text-xs whitespace-nowrap sm:text-sm">{SITE.email}</span>
             </a>
           </li>
           <li class="flex items-start gap-2">
