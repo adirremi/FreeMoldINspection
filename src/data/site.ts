@@ -62,18 +62,18 @@ export const SITE: SiteConfig = {
   email: "Freemoldinspection1@gmail.com",
   gmbCategory: "Mold Inspection Service",
   gmbUrl:
-    "https://www.google.com/maps/search/?api=1&query=Free+Mold+Inspection+Pembroke+Park+FL",
+    "https://www.google.com/maps/search/?api=1&query=4077+SW+40th+Ave+West+Park+FL+33023",
   web3formsKey: "YOUR_WEB3FORMS_ACCESS_KEY",
   address: {
     street: "4077 SW 40th Ave",
-    city: "Pembroke Park",
+    city: "West Park",
     state: "FL",
     zip: "33023",
     country: "US",
   },
   geo: {
-    latitude: 25.9879,
-    longitude: -80.1773,
+    latitude: 25.9919,
+    longitude: -80.1985,
   },
   hours: [
     "Sunday – Thursday: 8:00 AM – 8:00 PM",
@@ -101,8 +101,8 @@ export const SITE: SiteConfig = {
   social: [],
 } as const;
 
-/** Convenience helper: a single formatted address line. */
+/** Convenience helper: formatted address on two lines. */
 export function formattedAddress(): string {
   const { street, city, state, zip } = SITE.address;
-  return `${street}, ${city}, ${state} ${zip}`;
+  return `${street}\n${city}, ${state} ${zip}`;
 }
